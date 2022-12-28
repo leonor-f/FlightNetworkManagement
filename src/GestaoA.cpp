@@ -63,10 +63,16 @@ void GestaoA::readAirports() {
         latitudeF = stof(latitude);
         longitudeF = stof(longitude);
 
+        if (!existsCity(city)) cities.insert(city);
+
         Airport airport = Airport(code, name, city, country, latitudeF, longitudeF);
         airports.insert(airport);
     }
     readFlights();
+}
+
+bool GestaoA::existsCity(const string &city) {
+    return cities.find(city)->empty() || cities.empty();
 }
 
 void GestaoA::readFlights() {

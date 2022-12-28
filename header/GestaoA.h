@@ -62,6 +62,7 @@ public:
     void readAirlines();
     void readAirports();
     void readFlights();
+    bool existsCity(const string &city);
 
 private:
     tabHairports airports;

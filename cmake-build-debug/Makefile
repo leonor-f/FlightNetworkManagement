@@ -152,101 +152,101 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\projeto_aed_2.dir\build.make CMakeFiles/projeto_aed_2.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-src/airline.obj: src/airline.cpp.obj
-.PHONY : src/airline.obj
+src/Airline.obj: src/Airline.cpp.obj
+.PHONY : src/Airline.obj
 
 # target to build an object file
-src/airline.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\projeto_aed_2.dir\build.make CMakeFiles/projeto_aed_2.dir/src/airline.cpp.obj
-.PHONY : src/airline.cpp.obj
+src/Airline.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projeto_aed_2.dir\build.make CMakeFiles/projeto_aed_2.dir/src/Airline.cpp.obj
+.PHONY : src/Airline.cpp.obj
 
-src/airline.i: src/airline.cpp.i
-.PHONY : src/airline.i
+src/Airline.i: src/Airline.cpp.i
+.PHONY : src/Airline.i
 
 # target to preprocess a source file
-src/airline.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\projeto_aed_2.dir\build.make CMakeFiles/projeto_aed_2.dir/src/airline.cpp.i
-.PHONY : src/airline.cpp.i
+src/Airline.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projeto_aed_2.dir\build.make CMakeFiles/projeto_aed_2.dir/src/Airline.cpp.i
+.PHONY : src/Airline.cpp.i
 
-src/airline.s: src/airline.cpp.s
-.PHONY : src/airline.s
+src/Airline.s: src/Airline.cpp.s
+.PHONY : src/Airline.s
 
 # target to generate assembly for a file
-src/airline.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\projeto_aed_2.dir\build.make CMakeFiles/projeto_aed_2.dir/src/airline.cpp.s
-.PHONY : src/airline.cpp.s
+src/Airline.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projeto_aed_2.dir\build.make CMakeFiles/projeto_aed_2.dir/src/Airline.cpp.s
+.PHONY : src/Airline.cpp.s
 
-src/airport.obj: src/airport.cpp.obj
-.PHONY : src/airport.obj
+src/Airport.obj: src/Airport.cpp.obj
+.PHONY : src/Airport.obj
 
 # target to build an object file
-src/airport.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\projeto_aed_2.dir\build.make CMakeFiles/projeto_aed_2.dir/src/airport.cpp.obj
-.PHONY : src/airport.cpp.obj
+src/Airport.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projeto_aed_2.dir\build.make CMakeFiles/projeto_aed_2.dir/src/Airport.cpp.obj
+.PHONY : src/Airport.cpp.obj
 
-src/airport.i: src/airport.cpp.i
-.PHONY : src/airport.i
+src/Airport.i: src/Airport.cpp.i
+.PHONY : src/Airport.i
 
 # target to preprocess a source file
-src/airport.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\projeto_aed_2.dir\build.make CMakeFiles/projeto_aed_2.dir/src/airport.cpp.i
-.PHONY : src/airport.cpp.i
+src/Airport.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projeto_aed_2.dir\build.make CMakeFiles/projeto_aed_2.dir/src/Airport.cpp.i
+.PHONY : src/Airport.cpp.i
 
-src/airport.s: src/airport.cpp.s
-.PHONY : src/airport.s
+src/Airport.s: src/Airport.cpp.s
+.PHONY : src/Airport.s
 
 # target to generate assembly for a file
-src/airport.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\projeto_aed_2.dir\build.make CMakeFiles/projeto_aed_2.dir/src/airport.cpp.s
-.PHONY : src/airport.cpp.s
+src/Airport.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projeto_aed_2.dir\build.make CMakeFiles/projeto_aed_2.dir/src/Airport.cpp.s
+.PHONY : src/Airport.cpp.s
 
-src/flight.obj: src/flight.cpp.obj
-.PHONY : src/flight.obj
+src/Flight.obj: src/Flight.cpp.obj
+.PHONY : src/Flight.obj
 
 # target to build an object file
-src/flight.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\projeto_aed_2.dir\build.make CMakeFiles/projeto_aed_2.dir/src/flight.cpp.obj
-.PHONY : src/flight.cpp.obj
+src/Flight.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projeto_aed_2.dir\build.make CMakeFiles/projeto_aed_2.dir/src/Flight.cpp.obj
+.PHONY : src/Flight.cpp.obj
 
-src/flight.i: src/flight.cpp.i
-.PHONY : src/flight.i
+src/Flight.i: src/Flight.cpp.i
+.PHONY : src/Flight.i
 
 # target to preprocess a source file
-src/flight.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\projeto_aed_2.dir\build.make CMakeFiles/projeto_aed_2.dir/src/flight.cpp.i
-.PHONY : src/flight.cpp.i
+src/Flight.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projeto_aed_2.dir\build.make CMakeFiles/projeto_aed_2.dir/src/Flight.cpp.i
+.PHONY : src/Flight.cpp.i
 
-src/flight.s: src/flight.cpp.s
-.PHONY : src/flight.s
+src/Flight.s: src/Flight.cpp.s
+.PHONY : src/Flight.s
 
 # target to generate assembly for a file
-src/flight.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\projeto_aed_2.dir\build.make CMakeFiles/projeto_aed_2.dir/src/flight.cpp.s
-.PHONY : src/flight.cpp.s
+src/Flight.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projeto_aed_2.dir\build.make CMakeFiles/projeto_aed_2.dir/src/Flight.cpp.s
+.PHONY : src/Flight.cpp.s
 
-src/gestaoa.obj: src/gestaoa.cpp.obj
-.PHONY : src/gestaoa.obj
+src/GestaoA.obj: src/GestaoA.cpp.obj
+.PHONY : src/GestaoA.obj
 
 # target to build an object file
-src/gestaoa.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\projeto_aed_2.dir\build.make CMakeFiles/projeto_aed_2.dir/src/gestaoa.cpp.obj
-.PHONY : src/gestaoa.cpp.obj
+src/GestaoA.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projeto_aed_2.dir\build.make CMakeFiles/projeto_aed_2.dir/src/GestaoA.cpp.obj
+.PHONY : src/GestaoA.cpp.obj
 
-src/gestaoa.i: src/gestaoa.cpp.i
-.PHONY : src/gestaoa.i
+src/GestaoA.i: src/GestaoA.cpp.i
+.PHONY : src/GestaoA.i
 
 # target to preprocess a source file
-src/gestaoa.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\projeto_aed_2.dir\build.make CMakeFiles/projeto_aed_2.dir/src/gestaoa.cpp.i
-.PHONY : src/gestaoa.cpp.i
+src/GestaoA.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projeto_aed_2.dir\build.make CMakeFiles/projeto_aed_2.dir/src/GestaoA.cpp.i
+.PHONY : src/GestaoA.cpp.i
 
-src/gestaoa.s: src/gestaoa.cpp.s
-.PHONY : src/gestaoa.s
+src/GestaoA.s: src/GestaoA.cpp.s
+.PHONY : src/GestaoA.s
 
 # target to generate assembly for a file
-src/gestaoa.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\projeto_aed_2.dir\build.make CMakeFiles/projeto_aed_2.dir/src/gestaoa.cpp.s
-.PHONY : src/gestaoa.cpp.s
+src/GestaoA.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projeto_aed_2.dir\build.make CMakeFiles/projeto_aed_2.dir/src/GestaoA.cpp.s
+.PHONY : src/GestaoA.cpp.s
 
 # Help Target
 help:
@@ -260,18 +260,18 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
-	@echo ... src/airline.obj
-	@echo ... src/airline.i
-	@echo ... src/airline.s
-	@echo ... src/airport.obj
-	@echo ... src/airport.i
-	@echo ... src/airport.s
-	@echo ... src/flight.obj
-	@echo ... src/flight.i
-	@echo ... src/flight.s
-	@echo ... src/gestaoa.obj
-	@echo ... src/gestaoa.i
-	@echo ... src/gestaoa.s
+	@echo ... src/Airline.obj
+	@echo ... src/Airline.i
+	@echo ... src/Airline.s
+	@echo ... src/Airport.obj
+	@echo ... src/Airport.i
+	@echo ... src/Airport.s
+	@echo ... src/Flight.obj
+	@echo ... src/Flight.i
+	@echo ... src/Flight.s
+	@echo ... src/GestaoA.obj
+	@echo ... src/GestaoA.i
+	@echo ... src/GestaoA.s
 .PHONY : help
 
 
