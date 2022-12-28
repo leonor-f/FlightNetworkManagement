@@ -16,6 +16,9 @@ public:
     float getLatitude() const;
     float getLongitude() const;
 
+    bool operator==(const Airport& t) const;
+    bool operator<(const Airport& t) const;
+
 private:
     string code;
     string name;
@@ -24,6 +27,5 @@ private:
     float latitude;
     float longitude;
 };
-
 
 #endif //PROJETO_AED_2_AIRPORT_H

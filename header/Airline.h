@@ -14,6 +14,9 @@ public:
     string getCallSign() const;
     string getCountry() const;
 
+    bool operator==(const Airline &t) const;
+    bool operator<(const Airline& t) const;
+
 private:
     string code;
     string name;
