@@ -1,3 +1,3 @@
-C:/Users/gonca/OneDrive/Aulas/projeto_aed_2/cmake-build-debug/CMakeFiles/projeto_aed_2.dir
-C:/Users/gonca/OneDrive/Aulas/projeto_aed_2/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/gonca/OneDrive/Aulas/projeto_aed_2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/filip/CLionProjects/projetoaed2/cmake-build-debug/CMakeFiles/projeto_aed_2.dir
+C:/Users/filip/CLionProjects/projetoaed2/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/filip/CLionProjects/projetoaed2/cmake-build-debug/CMakeFiles/rebuild_cache.dir

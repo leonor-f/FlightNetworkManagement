@@ -1,8 +1,8 @@
 #include <iostream>
-#include "header/gestaoa.h"
-#include "header/airline.h"
-#include "header/airport.h"
-#include "header/flight.h"
+#include "header/GestaoA.h"
+#include "header/Airline.h"
+#include "header/Airport.h"
+#include "header/Flight.h"
 
 int main() {
     GestaoA a;
