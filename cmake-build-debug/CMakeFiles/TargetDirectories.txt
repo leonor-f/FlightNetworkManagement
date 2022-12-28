@@ -1,3 +1,0 @@
-C:/githubProjects/projetoaed2/cmake-build-debug/CMakeFiles/projeto_aed_2.dir
-C:/githubProjects/projetoaed2/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/githubProjects/projetoaed2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
