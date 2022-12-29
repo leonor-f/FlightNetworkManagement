@@ -17,6 +17,10 @@ GestaoA::GestaoA() {
     airlines = al;
 }
 
+/**
+ * Lê o ficheiro airlines.csv e guarda todas as companhias aéreas.
+ * Complexidade Temporal O(n) (n é o tamanho do ficheiro retirando o cabeçalho).
+ */
 void GestaoA::readAirlines() {
     string ficheiro = "../resources/airlines.csv";
     ifstream ifs1;
@@ -42,6 +46,10 @@ void GestaoA::readAirlines() {
     ifs1.close();
 }
 
+/**
+ * Lê o ficheiro airports.csv e vai colocando os aerportos no grafo, assim como guarda todas as cidades diferentes.
+ * Complexidade Temporal O(n) (n é o tamanho do ficheiro retirando o cabeçalho).
+ */
 void GestaoA::readAirports() {
     string ficheiro = "../resources/airports.csv";
     ifstream ifs2;
@@ -63,7 +71,7 @@ void GestaoA::readAirports() {
         getline(stream, longitude, '\r');
 
         latitudeLD = stold(latitude);
-        longitudeLD = stof(longitude);
+        longitudeLD = stold(longitude);
 
         CityCountry cc(city, country);
         cityset.insert(cc);
@@ -78,6 +86,10 @@ void GestaoA::readAirports() {
     ifs2.close();
 }
 
+/**
+ *
+ * Complexidade Temporal O(n) (n é o tamanho do ficheiro retirando o cabeçalho).
+ */
 void GestaoA::readFlights() {
     string ficheiro = "../resources/flights.csv";
     ifstream ifs3;
@@ -120,8 +132,8 @@ pair<int, int> GestaoA::auxCenterDraw(int n, bool v) {
 }
 
 /**
- * Desenho do Menu principal
- * Complexidade Temporal O(1)
+ * Desenho do Menu principal.
+ * Complexidade Temporal O(1).
  */
 void GestaoA::drawMenu() {
     cout << "\n+---------------------------------------------+\n"
@@ -136,6 +148,12 @@ void GestaoA::drawMenu() {
     cout << "\nEscolha a opcao e pressione ENTER:";
 }
 
+/**
+ * Desenha uma cidade (parâmetro cc) e identifica se é a 1ª cidade a ser escrita para desenhar o cabeçalho da tabela (parâmetro header).
+ * Complexidade Temporal O(n).
+ * @param cc
+ * @param header
+ */
 void GestaoA::drawCity(const CityCountry& cc, bool header) const {
     if (header) {
         cout << "\n+-------------------------------+---------------------------------+\n"
@@ -167,6 +185,11 @@ void GestaoA::drawCity(const CityCountry& cc, bool header) const {
     cout << "|" << "\n";
 }
 
+/**
+ * Desenha todas as cidades e chama a função drawCity para desenhar uma de cada vez.
+ * Complexidade Temporal O(n^2).
+ * @param citiesaux
+ */
 void GestaoA::drawCities(const vector<CityCountry>& citiesaux) const {
     bool v = true;
     for (const CityCountry& s : citiesaux) {
@@ -176,6 +199,12 @@ void GestaoA::drawCities(const vector<CityCountry>& citiesaux) const {
     cout << "+-------------------------------+---------------------------------+\n";
 }
 
+/**
+ * Desenha uma aeroporto e identifica se é o 1º aeroporto a ser escrito para desenhar o cabeçalho da tabela (parâmetro header).
+ * Complexidade Temporal O(n).
+ * @param code
+ * @param header
+ */
 void GestaoA::drawAirport(const string& code, bool header) {
     if (header) {
         cout << "\n+-----+--------------------------------------------------------+---------------------------------+\n"
@@ -207,6 +236,11 @@ void GestaoA::drawAirport(const string& code, bool header) {
     cout << "|" << "\n";
 }
 
+/**
+ * Desenha todos os aeroportos e chama a função drawAirport para desenhar uma de cada vez.
+ * Complexidade Temporal O(n^2).
+ * @param airports
+ */
 void GestaoA::drawAirports(const vector<string>& airports) {
     bool v = true;
     for (int i = 1; i < airports.size(); i++) {
@@ -216,6 +250,12 @@ void GestaoA::drawAirports(const vector<string>& airports) {
     cout << "+-----+--------------------------------------------------------+---------------------------------+\n";
 }
 
+/**
+ * Desenha uma companhia aérea e identifica se é a 1ª companhia a ser escrito para desenhar o cabeçalho da tabela (parâmetro header).
+ * Complexidade Temporal O(n).
+ * @param a
+ * @param header
+ */
 void GestaoA::drawAirline(const Airline& a, bool header) const {
     if (header) {
         cout << "\n+-----+------------------------------------------+--------------------------------------+\n"
@@ -247,6 +287,11 @@ void GestaoA::drawAirline(const Airline& a, bool header) const {
     cout << "|" << "\n";
 }
 
+/**
+ * Desenha todas as companhias aéreas e chama a função drawAirline para desenhar uma de cada vez.
+ * Complexidade Temporal O(n^2).
+ * @param airlinesaux
+ */
 void GestaoA::drawAirlines(const vector<Airline>& airlinesaux) const {
     bool v = true;
     for (const Airline& s: airlinesaux) {
@@ -277,6 +322,11 @@ void GestaoA::drawFlights(const string& code) {
     cout << "+-------------+---------+\n";
 }
 
+/**
+ * Pergunta ao utilizador se quer organizar a tabela de forma ascendente ou descendente.
+ * A Complexidade Temporal desta função depende do tempo que o utilizador demora a dar o input.
+ * @return True para input Ascendente (A) e false para input Descendente (D)
+ */
 bool GestaoA::ordenar() {
     string op;
     while (true) {

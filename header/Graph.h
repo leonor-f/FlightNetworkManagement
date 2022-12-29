@@ -15,7 +15,7 @@ class Graph { // grafo do sistema
     struct Flight {
         int dest;       // node de destino
         string airline; // airline
-        int distance;   // distância entre os dois aeroportos, NÃO NECESSÁRIO IMPLEMENTAR JÁ
+        float distance;   // distância entre os dois aeroportos, NÃO NECESSÁRIO IMPLEMENTAR JÁ
     };
 
     struct Airport {
@@ -38,6 +38,8 @@ public:
 
     Graph();          // default constructor
     explicit Graph(int nodes); // Constructor: n.º nodes
+
+    float calcDistance(const string& code1, const string& code2); //Calcular Distância usando a fórmula do enunciado do projeto
 
     // getters
 
