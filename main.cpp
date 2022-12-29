@@ -2,18 +2,17 @@
 #include <algorithm>
 #include "header/GestaoA.h"
 #include "header/Airline.h"
-#include "header/Airport.h"
-#include "header/Flight.h"
-#include "header/menu.h"
+#include "header/Menu.h"
 
 int main() {
     GestaoA a;
     a.readAirlines();
     a.readAirports();
+    a.readFlights();
 
     // ciclo do programa
     while (true) {
-        a.drawMenu(); // desenha o menu
+        GestaoA::drawMenu(); // desenha o menu
         string op;
         cin >> op;
         if (op.length() != 1) {
@@ -22,10 +21,10 @@ int main() {
         }
         // dependendo do input do utilizador, vai executar tarefas diferentes
         if (op == "1") {
-            bool s = a.ordenar();
+            bool s = GestaoA::ordenar();
             vector<CityCountry> aux;
             GestaoA::tabHcities temp = a.getCities();
-            for(auto i: temp){
+            for(const auto& i: temp){
                 aux.push_back(i);
             }
 
@@ -35,23 +34,19 @@ int main() {
             Menu::voltar();
         }
         else if (op == "2") {
-            bool s = a.ordenar();
-            vector<Airport> aux;
-            GestaoA::tabHairports temp = a.getAirports();
-            for(auto i: temp){
-                aux.push_back(i);
-            }
+            bool s = GestaoA::ordenar();
+            vector<string> airports = a.getAirports();
 
-            sort(aux.begin(), aux.end());
-            if(!s){reverse(aux.begin(), aux.end());}
-            a.drawAirports(aux);
+            sort(airports.begin(), airports.end());
+            if(!s) reverse(airports.begin(), airports.end());
+            a.drawAirports(airports);
             Menu::voltar();
         }
         else if (op == "3") {
-            bool s = a.ordenar();
+            bool s = GestaoA::ordenar();
             vector<Airline> aux;
             GestaoA::tabHairlines temp = a.getAirlines();
-            for(auto i: temp){
+            for(const auto& i: temp){
                 aux.push_back(i);
             }
 
@@ -61,23 +56,19 @@ int main() {
             Menu::voltar();
         }
         else if (op == "4") {
-
-            Menu::voltar();
-        }
-        else if (op == "5") {
-
-            Menu::voltar();
-        }
-        else if (op == "6") {
-
-            Menu::voltar();
-        }
-        else if (op == "7") {
-
-            Menu::voltar();
-        }
-        else if (op == "8") {
-
+            string code;
+            while (true) {
+                cout << "\nInsira o codigo do aeroporto de inicio: ";
+                cin >> code;
+                if (code.length() != 3) {
+                    Menu::teclaErro();
+                    continue;
+                }
+                transform(code.begin(), code.end(), code.begin(), ::toupper);
+                if ( a.getFlightNetwork().getAirportFlights(code).empty()) Menu::aeroportoNaoExiste();
+                else break;
+            }
+            a.drawFlights(code);
             Menu::voltar();
         }
         else if(op == "P" || op == "p"){

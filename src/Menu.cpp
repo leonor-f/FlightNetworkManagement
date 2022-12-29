@@ -1,4 +1,4 @@
-#include "../header/menu.h"
+#include "../header/Menu.h"
 #include <iostream>
 
 using namespace std;
@@ -24,4 +24,10 @@ void Menu::voltar() {
         cout << "\nPressione [V] para voltar ao Menu:";
         cin >> op;
     }
+}
+
+void Menu::aeroportoNaoExiste() {
+    cout << "\n+-------------------------------+\n"
+            "|O aeroporto indicado nao existe|\n"
+            "+-------------------------------+\n";
 }

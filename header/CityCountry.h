@@ -1,12 +1,13 @@
-#ifndef PROJETO_AED_2_CITYCOUNTRY_H
-#define PROJETO_AED_2_CITYCOUNTRY_H
+#ifndef CITYCOUNTRY_H
+#define CITYCOUNTRY_H
+
 #include<string>
 
 using namespace std;
 
 class CityCountry {
 public:
-    CityCountry(string city_, string country_);
+    CityCountry(const string& city, const string& country);
 
     string getCity() const;
     string getCountry() const;
@@ -15,9 +16,9 @@ public:
     bool operator<(const CityCountry &t) const;
 
 private:
-    string city;
-    string country;
+    string city_;
+    string country_;
 };
 
 
-#endif //PROJETO_AED_2_CITYCOUNTRY_H
+#endif
