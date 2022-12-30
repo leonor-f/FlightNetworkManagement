@@ -141,10 +141,44 @@ void GestaoA::drawMenu() {
             "+---------------------------------------------+\n"
             "| [1] - Listar Cidades                        |\n"
             "| [2] - Listar Aeroportos                     |\n"
-            "| [3] - Listar Airlines                       |\n"
+            "| [3] - Listar Companhias                     |\n"
             "| [4] - Listar Voos                           |\n"
+            "| [5] - N a partir de um Aeroporto            |\n" // irá abrir novo menu
+            "| [6] - Destinos com maximo de Y voos /TODO   |\n" // irá abrir novo menu
             "| [Q] - Sair da aplicacao                     |\n"
             "+---------------------------------------------+\n";
+    cout << "\nEscolha a opcao e pressione ENTER:";
+}
+
+/**
+ * Desenho de um menu secundário para mais opções.
+ * Complexidade Temporal O(1).
+ */
+void GestaoA::drawNumberMenu() {
+    cout << "\n+-----------------------------------------------------+\n"
+            "|                GESTAO DE AEROPORTOS                 |\n"
+            "+-----------------------------------------------------+\n"
+            "| [1] - N Companhias Aereas num Aeroporto             |\n"
+            "| [2] - N Destinos Diferentes a partir de um Aeroporto|\n"
+            "| [3] - N Paises Diferentes a partir de um Aeroporto  |\n"
+            "| [V] - Voltar                                        |\n"
+            "+-----------------------------------------------------+\n";
+    cout << "\nEscolha a opcao e pressione ENTER:";
+}
+
+/**
+ * Desenho de um menu secundário para mais opções.
+ * Complexidade Temporal O(1).
+ */
+void GestaoA::drawYMenu() {
+    cout << "\n+---------------------------------------------------+\n"
+            "|                GESTAO DE AEROPORTOS               |\n"
+            "+---------------------------------------------------+\n"
+            "| [1] - Aeroportos Atingiveis num maximo de Y voos  |\n"
+            "| [2] - Cidades Atingiveis num maximo de Y voos     |\n"
+            "| [3] - Paises Atingiveis num maximo de Y voos      |\n"
+            "| [V] - Voltar                                      |\n"
+            "+---------------------------------------------------+\n";
     cout << "\nEscolha a opcao e pressione ENTER:";
 }
 
@@ -300,32 +334,200 @@ void GestaoA::drawAirlines(const vector<Airline>& airlinesaux) const {
     }
     cout << "+-----+------------------------------------------+--------------------------------------+\n";
 }
-// TODO ir buscar o nome do destino e da companhia em vez das iniciais
-void GestaoA::drawFlight(const string& code, const string& airline, bool header) {
+
+/**
+ * Desenha um voo, representado pelo nome do aeroporto de destino (parâmetro name) e nome da companhia aérea (parâmetro airline), desenhando o cabeçalho para o 1º desenho (parâmetro header)
+ * Complexidade Temporal O(n)
+ * @param name
+ * @param airline
+ * @param header
+ */
+void GestaoA::drawFlight(const string& name, const string& airline, bool header) {
     if (header) {
-        cout << "\n+-------------+---------+\n"
-                "| DESTINATION | AIRLINE |\n"
-                "+-------------+---------+\n";
+        cout << "\n+--------------------------------------------------------+------------------------------------------+\n"
+                "|                   AIRPORT DESTINATION                  |                  AIRLINE                 |\n"
+                "+--------------------------------------------------------+------------------------------------------+\n";
     }
-    cout << "|     " << code << "     |";
-    cout << "   " << airline << "   |\n";
+    cout << "|";
+    pair<int, int> pad = auxCenterDraw(getMaxAirportNameLength() - (int)name.length(), (int)name.length()%2 == 1);
+    for (int f = 0; f < pad.first; f++) {
+        cout << " ";
+        ++f;
+    }
+    cout << name;
+    for (int e = 0; e < pad.second; e++) {
+        cout << " ";
+        ++e;
+    }
+    cout << "|";
+    pad = auxCenterDraw(getMaxAirlineNameLength() - (int)airline.length(), (int)airline.length()%2 == 1);
+    for (int f = 0; f < pad.first; f++) {
+        cout << " ";
+        ++f;
+    }
+    cout << airline;
+    for (int e = 0; e < pad.second; e++) {
+        cout << " ";
+        ++e;
+    }
+    cout << "|\n";
 }
 
+/**
+ * Vai buscar os voos de um aeroporto (parâmetro code) e chama a função drawFlight para desenhar um a um.
+ * Complexidade Temporal O(n^2).
+ * @param code
+ */
 void GestaoA::drawFlights(const string& code) {
     bool v = true;
     list<pair<int, string>> airportFlights = flightNetwork_.getAirportFlights(code);
-    for (const auto& flight : airportFlights) {
-        string cd = flightNetwork_.getAirports().at(flight.first);
-        drawFlight(cd, flight.second, v);
+    for (const auto &flight: airportFlights) {
+        string cd = flightNetwork_.getAirportName(flight.first);
+        string airlinename;
+        for (auto airline: airlines) {
+            if (airline.getCode() == flight.second) {
+                airlinename = airline.getName();
+            }
+        }
+        drawFlight(cd, airlinename, v);
         v = false;
     }
-    cout << "+-------------+---------+\n";
+    cout << "+--------------------------------------------------------+------------------------------------------+\n";
+}
+
+/**
+ * Conta as companhias aéreas que têm voos num aeroporto (parâmetro code) e desenha no terminal.
+ * Complexidade Temporal O(n).
+ * @param code
+ */
+void GestaoA::drawNumberOfAirlines(const string &code) {
+    set<string> temp;
+    list<pair<int, string>> aux = flightNetwork_.getAirportFlights(code);
+    int size;
+    string helpme;
+    for(auto i: aux){
+        temp.insert(i.second);
+    }
+    size = (int)temp.size();
+    if(size < 10){
+        helpme = "0" + to_string(size);
+    }
+    else{helpme = to_string(size);}
+
+    cout << "\n+---------+----------+\n"
+            "| AIRPORT | AIRLINES |\n"
+            "+---------+----------+\n";
+
+    cout << "|   " << code << "   |";
+    pair<int, int> pad = auxCenterDraw(9 - helpme.length(), helpme.length()%2 == 1);
+    for (int f = 0; f < pad.first; f++) {
+        cout << " ";
+        ++f;
+    }
+    cout << helpme;
+    for (int e = 0; e < pad.second; e++) {
+        cout << " ";
+        ++e;
+    }
+    cout << "|\n";
+    cout << "+---------+----------+\n";
+}
+
+/**
+ * Conta os destinos/aeroportos a que se pode chegar a partir de um aeroporto (parâmetro code) e desenha no terminal.
+ * Complexidade Temporal O(n).
+ * @param code
+ */
+void GestaoA::drawNumberOfTargets(const string &code) {
+    set<string> temp;
+    list<pair<int, string>> aux = flightNetwork_.getAirportFlights(code);
+    int size;
+    string helpme;
+    for(auto i: aux){
+        temp.insert(flightNetwork_.getAirportCode(i.first));
+    }
+
+    size = (int)temp.size();
+    if(size < 10){
+        helpme = "00" + to_string(size);
+    }
+    else if(size >= 10 && size < 100){
+        helpme = "0" + to_string(size);
+    }
+    else{helpme = to_string(size);}
+
+    cout << "\n+---------+-------------+\n"
+            "| AIRPORT | DESTINATION |\n"
+            "+---------+-------------+\n";
+    cout << "|   " << code << "   |";
+    pair<int, int> pad = auxCenterDraw(12 - helpme.length(), helpme.length()%2 == 1);
+    for (int f = 0; f < pad.first; f++) {
+        cout << " ";
+        ++f;
+    }
+    cout << helpme;
+    for (int e = 0; e < pad.second; e++) {
+        cout << " ";
+        ++e;
+    }
+    cout << "|\n";
+    cout << "+---------+-------------+\n";
+}
+
+/**
+ * Conta os países a que se pode chegar a partir de um aeroporto (parâmetro code) e desenha no terminal.
+ * Complexidade Temporal O(n).
+ * @param code
+ */
+void GestaoA::drawNumberOfCountries(const string &code) {
+    set<string> temp;
+    list<pair<int, string>> aux = flightNetwork_.getAirportFlights(code);
+    int size;
+    string helpme;
+    for(auto i: aux){
+        temp.insert(flightNetwork_.getAirportCountry(i.first));
+    }
+
+    size = (int)temp.size();
+    if(size < 10){
+        helpme = "0" + to_string(size);
+    }
+    else{helpme = to_string(size);}
+
+    cout << "\n+---------+-----------+\n"
+            "| AIRPORT | COUNTRIES |\n"
+            "+---------+-----------+\n";
+    cout << "|   " << code << "   |";
+    pair<int, int> pad = auxCenterDraw(10 - helpme.length(), helpme.length()%2 == 0);
+    for (int f = 0; f < pad.first; f++) {
+        cout << " ";
+        ++f;
+    }
+    cout << helpme;
+    for (int e = 0; e < pad.second; e++) {
+        cout << " ";
+        ++e;
+    }
+    cout << "|\n";
+    cout << "+---------+-----------+\n";
+}
+
+void GestaoA::drawYairports(int y) { //TODO
+    return;
+}
+
+void GestaoA::drawYcities(int y) { //TODO
+    return;
+}
+
+void GestaoA::drawYcountries(int y) { //TODO
+    return;
 }
 
 /**
  * Pergunta ao utilizador se quer organizar a tabela de forma ascendente ou descendente.
  * A Complexidade Temporal desta função depende do tempo que o utilizador demora a dar o input.
- * @return True para input Ascendente (A) e false para input Descendente (D)
+ * @return True para input Ascendente (A) e false para input Descendente (D).
  */
 bool GestaoA::ordenar() {
     string op;

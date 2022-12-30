@@ -12,6 +12,8 @@
 using namespace std;
 
 class Graph { // grafo do sistema
+public:
+
     struct Flight {
         int dest;       // node de destino
         string airline; // airline
@@ -29,13 +31,6 @@ class Graph { // grafo do sistema
         bool visited;          // para futuras pesquisas
     };
 
-    int n;              // tamanho do grafo, n.º de aeroportos
-    vector<Airport> airports; // lista de aeroportos/nodes
-    map<string, int> airportsInfo; // relaciona cada aeroporto com um inteiro
-
-
-public:
-
     Graph();          // default constructor
     explicit Graph(int nodes); // Constructor: n.º nodes
 
@@ -50,6 +45,12 @@ public:
     string getAirportCountry(const string& code) const;
     long double getAirportLatitude(const string& code) const;
     long double getAirportLongitude(const string& code) const;
+    string getAirportCode(const int& dest) const;
+    string getAirportName(const int& dest) const;
+    string getAirportCity(const int& dest) const;
+    string getAirportCountry(const int& dest) const;
+    long double getAirportLatitude(const int& dest) const;
+    long double getAirportLongitude(const int& dest) const;
     bool getAirportVisited(int airport) const;
     list<pair<int, string>> getAirportFlights(const string& code) const;
     const map<string, int>& getAirportsInfo() const;
@@ -59,6 +60,11 @@ public:
 
     void setNode(const string& code, const string& name, const string& city, const string& country, long double latitude, long double longitude);
     void addFlight(int src, int dest, const string& airline); // adiciona voo de src para dest
+
+private:
+    int n;              // tamanho do grafo, n.º de aeroportos
+    vector<Airport> airports; // lista de aeroportos/nodes
+    map<string, int> airportsInfo; // relaciona cada aeroporto com um inteiro
 };
 
 #endif

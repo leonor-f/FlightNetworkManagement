@@ -71,6 +71,146 @@ int main() {
             a.drawFlights(code);
             Menu::voltar();
         }
+        else if(op == "5"){
+            while(true){
+                a.drawNumberMenu();
+                string op2;
+                cin >> op2;
+                if (op2.length() != 1) {
+                    Menu::teclaErro();
+                    continue;
+                }
+                else if(op2 == "1"){
+                    string code;
+                    while (true) {
+                        cout << "\nInsira o codigo do aeroporto de inicio: ";
+                        cin >> code;
+                        if (code.length() != 3) {
+                            Menu::teclaErro();
+                            continue;
+                        }
+                        transform(code.begin(), code.end(), code.begin(), ::toupper);
+                        if ( a.getFlightNetwork().getAirportFlights(code).empty()) Menu::aeroportoNaoExiste();
+                        else break;
+                    }
+                    a.drawNumberOfAirlines(code);
+                    Menu::voltar();
+                }
+                else if(op2 == "2"){
+                    string code;
+                    while (true) {
+                        cout << "\nInsira o codigo do aeroporto de inicio: ";
+                        cin >> code;
+                        if (code.length() != 3) {
+                            Menu::teclaErro();
+                            continue;
+                        }
+                        transform(code.begin(), code.end(), code.begin(), ::toupper);
+                        if ( a.getFlightNetwork().getAirportFlights(code).empty()) Menu::aeroportoNaoExiste();
+                        else break;
+                    }
+                    a.drawNumberOfTargets(code);
+                    Menu::voltar();
+                }
+                else if(op2 == "3"){
+                    string code;
+                    while (true) {
+                        cout << "\nInsira o codigo do aeroporto de inicio: ";
+                        cin >> code;
+                        if (code.length() != 3) {
+                            Menu::teclaErro();
+                            continue;
+                        }
+                        transform(code.begin(), code.end(), code.begin(), ::toupper);
+                        if ( a.getFlightNetwork().getAirportFlights(code).empty()) Menu::aeroportoNaoExiste();
+                        else break;
+                    }
+                    a.drawNumberOfCountries(code);
+                    Menu::voltar();
+                }
+                else if(op2 == "V" || op2 == "v"){
+                    break;
+                }
+            }
+        }
+        //TODO
+        else if(op == "6"){
+            while(true){
+                a.drawYMenu();
+                string op3;
+                cin >> op3;
+                if (op3.length() != 1) {
+                    Menu::teclaErro();
+                    continue;
+                }
+                else if(op3 == "1"){
+                    string code;
+                    string temp;
+                    int y;
+                    while (true) {
+                        cout << "\nInsira o codigo do aeroporto de inicio: ";
+                        cin >> code;
+                        if (code.length() != 3) {
+                            Menu::teclaErro();
+                            continue;
+                        }
+                        cout << "\nQuantos voos? (Insira um numero): ";
+                        cin >> temp;
+                        transform(code.begin(), code.end(), code.begin(), ::toupper);
+                        if (a.getFlightNetwork().getAirportFlights(code).empty()) Menu::aeroportoNaoExiste();
+                        else break;
+                    }
+                    y = stoi(temp);
+                    a.drawYairports(y);
+                    Menu::voltar();
+                }
+                else if(op3 == "2"){
+                    string code;
+                    string temp;
+                    int y;
+                    while (true) {
+                        cout << "\nInsira o codigo do aeroporto de inicio: ";
+                        cin >> code;
+                        if (code.length() != 3) {
+                            Menu::teclaErro();
+                            continue;
+                        }
+                        cout << "\nQuantos voos? (Insira um numero): ";
+                        cin >> temp;
+                        transform(code.begin(), code.end(), code.begin(), ::toupper);
+                        if (a.getFlightNetwork().getAirportFlights(code).empty()) Menu::aeroportoNaoExiste();
+                        else break;
+                    }
+                    y = stoi(temp);
+                    a.drawYcities(y);
+                    Menu::voltar();
+                }
+                else if(op3 == "3"){
+                    string code;
+                    string temp;
+                    int y;
+                    while (true) {
+                        cout << "\nInsira o codigo do aeroporto de inicio: ";
+                        cin >> code;
+                        if (code.length() != 3) {
+                            Menu::teclaErro();
+                            continue;
+                        }
+                        cout << "\nQuantos voos? (Insira um numero): ";
+                        cin >> temp;
+                        transform(code.begin(), code.end(), code.begin(), ::toupper);
+                        if (a.getFlightNetwork().getAirportFlights(code).empty()) Menu::aeroportoNaoExiste();
+                        else break;
+                    }
+                    y = stoi(temp);
+                    a.drawYcountries(y);
+                    Menu::voltar();
+                }
+                else if(op3 == "V" || op3 == "v"){
+                    break;
+                }
+            }
+        }
         else if(op == "P" || op == "p"){
             Menu::voltar();
         }

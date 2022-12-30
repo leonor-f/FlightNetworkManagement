@@ -11,6 +11,11 @@ void Graph::addFlight(int src, int dest, const string& airline) {
     }
 }
 
+/**
+ * Junta todos os códigos não vazios.
+ * Complexidade Temporal O(n) onde n é o número de aeroportos.
+ * @return um vetor com todos os códigos dos aeroportos.
+ */
 vector<string> Graph::getAirports() const {
     vector<string> airportsCode;
     for (const Airport& airport : airports) {
@@ -43,10 +48,40 @@ long double Graph::getAirportLongitude(const string& code) const {
     return airports.at(getAirportInfo(code)).longitude;
 }
 
+string Graph::getAirportCode(const int &dest) const {
+    return airports.at(dest).code;
+}
+
+string Graph::getAirportName(const int &dest) const {
+    return airports.at(dest).name;
+}
+
+string Graph::getAirportCity(const int &dest) const {
+    return airports.at(dest).city;
+}
+
+string Graph::getAirportCountry(const int &dest) const {
+    return airports.at(dest).country;
+}
+
+long double Graph::getAirportLatitude(const int &dest) const {
+    return airports.at(dest).latitude;
+}
+
+long double Graph::getAirportLongitude(const int &dest) const {
+    return airports.at(dest).longitude;
+}
+
 bool Graph::getAirportVisited(int airport) const {
     return airports.at(airport).visited;
 }
 
+/**
+ * Vai buscar os voos a partir de um aeroporto inicial (parâmetro code).
+ * Complexidade Temporal O(n) onde n é o número de voos num aeroporto.
+ * @param code
+ * @return uma lista de pares com o destino e companhia aérea de um voo.
+ */
 list<pair<int, string>> Graph::getAirportFlights(const string& code) const {
     list<pair<int, string>> flights;
     pair<int, string> tempPair;
@@ -66,7 +101,7 @@ const map<string, int>& Graph::getAirportsInfo() const {
 
 int Graph::getAirportInfo(const string& code) const {
     if (airportsInfo.find(code) != airportsInfo.end()) return airportsInfo.at(code);
-    return  0;
+    return 0;
 }
 
 void Graph::setNode(const string &code, const string &name, const string &city,

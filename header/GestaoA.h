@@ -44,14 +44,22 @@ class GestaoA {
 
         static pair<int, int> auxCenterDraw(int n, bool v);
         static void drawMenu();
+        static void drawNumberMenu();
+        static void drawYMenu();
         void drawCity(const CityCountry& cc, bool header) const;
         void drawCities(const vector<CityCountry>& citiesaux) const;
         void drawAirport(const string& code, bool header);
         void drawAirports(const vector<string>& airports);
         void drawAirline(const Airline& a, bool header) const;
         void drawAirlines(const vector<Airline>& airlinesaux) const;
-        static void drawFlight(const string& code, const string& airline, bool header);
+        void drawFlight(const string& name, const string& airline, bool header);
         void drawFlights(const string& code);
+        void drawNumberOfAirlines(const string& code);
+        void drawNumberOfTargets(const string& code);
+        void drawNumberOfCountries(const string& code);
+        void drawYairports(int y);
+        void drawYcities(int y);
+        void drawYcountries(int y);
         static bool ordenar();
 
         void setMaxCityLength(int maxLength_);
