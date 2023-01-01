@@ -38,7 +38,7 @@ public:
 
     // getters
 
-    vector<string> getAirports() const; // return de vetor de códigos que representam cada aeroporto
+    vector<Airport> getAirports() const; // return de vetor de códigos que representam cada aeroporto
     string getAirportCode(const string& code) const;
     string getAirportName(const string& code) const;
     string getAirportCity(const string& code) const;
@@ -61,7 +61,6 @@ public:
     void setNode(const string& code, const string& name, const string& city, const string& country, long double latitude, long double longitude);
     void addFlight(int src, int dest, const string& airline); // adiciona voo de src para dest
 
-private:
     int n;              // tamanho do grafo, n.º de aeroportos
     vector<Airport> airports; // lista de aeroportos/nodes
     map<string, int> airportsInfo; // relaciona cada aeroporto com um inteiro

@@ -35,8 +35,11 @@ int main() {
         }
         else if (op == "2") {
             bool s = GestaoA::ordenar();
-            vector<string> airports = a.getAirports();
-
+            vector<Graph::Airport> temp = a.getAirports();
+            vector<string> airports;
+            for(auto i: temp){
+                airports.push_back(i.code);
+            }
             sort(airports.begin(), airports.end());
             if(!s) reverse(airports.begin(), airports.end());
             a.drawAirports(airports);
@@ -161,7 +164,7 @@ int main() {
                         else break;
                     }
                     y = stoi(temp);
-                    a.drawYairports(y);
+                    a.Yairports(code, y);
                     Menu::voltar();
                 }
                 else if(op3 == "2"){
@@ -182,7 +185,7 @@ int main() {
                         else break;
                     }
                     y = stoi(temp);
-                    a.drawYcities(y);
+                    a.Ycities(code, y);
                     Menu::voltar();
                 }
                 else if(op3 == "3"){
@@ -203,7 +206,7 @@ int main() {
                         else break;
                     }
                     y = stoi(temp);
-                    a.drawYcountries(y);
+                    a.Ycountries(code, y);
                     Menu::voltar();
                 }
                 else if(op3 == "V" || op3 == "v"){

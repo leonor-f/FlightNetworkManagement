@@ -16,10 +16,10 @@ void Graph::addFlight(int src, int dest, const string& airline) {
  * Complexidade Temporal O(n) onde n é o número de aeroportos.
  * @return um vetor com todos os códigos dos aeroportos.
  */
-vector<string> Graph::getAirports() const {
-    vector<string> airportsCode;
+vector<Graph::Airport> Graph::getAirports() const {
+    vector<Graph::Airport> airportsCode;
     for (const Airport& airport : airports) {
-        if (!airport.code.empty()) airportsCode.push_back(airport.code);
+        if (!airport.code.empty()) airportsCode.push_back(airport);
     }
     return airportsCode;
 }

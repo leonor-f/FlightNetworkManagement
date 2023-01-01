@@ -4,6 +4,7 @@
 #include <unordered_set>
 #include <string>
 #include <vector>
+#include <set>
 #include "Graph.h"
 #include "Airline.h"
 #include "CityCountry.h"
@@ -57,9 +58,13 @@ class GestaoA {
         void drawNumberOfAirlines(const string& code);
         void drawNumberOfTargets(const string& code);
         void drawNumberOfCountries(const string& code);
-        void drawYairports(int y);
-        void drawYcities(int y);
-        void drawYcountries(int y);
+        void drawYairports(string code, set<string> airportsReached);
+        void drawYcities(string code, set<string> airportsReached);
+        void drawYcountries(string code, set<string> airportsReached);
+
+        void Yairports(string code, int y);
+        void Ycities(string code, int y);
+        void Ycountries(string code, int y);
         static bool ordenar();
 
         void setMaxCityLength(int maxLength_);
@@ -68,7 +73,7 @@ class GestaoA {
         void setMaxAirlineNameLength(int maxLength_);
         void setMaxAirlineCountryLength(int maxLength_);
 
-        vector<string> getAirports() const;
+        vector<Graph::Airport> getAirports() const;
         tabHcities getCities() const;
         tabHairlines getAirlines() const;
         Graph getFlightNetwork() const;
