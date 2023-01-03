@@ -164,7 +164,7 @@ int main() {
                         else break;
                     }
                     y = stoi(temp);
-                    a.Yairports(code, y);
+                    a.drawYairports(code, y);
                     Menu::voltar();
                 }
                 else if(op3 == "2"){
@@ -185,7 +185,7 @@ int main() {
                         else break;
                     }
                     y = stoi(temp);
-                    a.Ycities(code, y);
+                    a.drawYcities(code, y);
                     Menu::voltar();
                 }
                 else if(op3 == "3"){
@@ -206,7 +206,7 @@ int main() {
                         else break;
                     }
                     y = stoi(temp);
-                    a.Ycountries(code, y);
+                    a.drawYcountries(code, y);
                     Menu::voltar();
                 }
                 else if(op3 == "V" || op3 == "v"){

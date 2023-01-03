@@ -58,13 +58,13 @@ class GestaoA {
         void drawNumberOfAirlines(const string& code);
         void drawNumberOfTargets(const string& code);
         void drawNumberOfCountries(const string& code);
-        void drawYairports(string code, set<string> airportsReached);
-        void drawYcities(string code, set<string> airportsReached);
-        void drawYcountries(string code, set<string> airportsReached);
+        void drawYairports(string code, int y);
+        void drawYcities(string code, int y);
+        void drawYcountries(string code, int y);
 
-        void Yairports(string code, int y);
-        void Ycities(string code, int y);
-        void Ycountries(string code, int y);
+        set<string> Yairports(string code, int y);
+        set<CityCountry> Ycities(string code, int y);
+        set<string> Ycountries(string code, int y);
         static bool ordenar();
 
         void setMaxCityLength(int maxLength_);
