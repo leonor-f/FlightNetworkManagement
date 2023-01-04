@@ -145,7 +145,7 @@ void GestaoA::drawMenu() {
             "| [3] - Listar Companhias                     |\n"
             "| [4] - Listar Voos                           |\n"
             "| [5] - N a partir de um Aeroporto            |\n" // irá abrir novo menu
-            "| [6] - Destinos com maximo de Y voos /TODO   |\n" // irá abrir novo menu
+            "| [6] - Destinos com maximo de Y voos         |\n" // irá abrir novo menu
             "| [Q] - Sair da aplicacao                     |\n"
             "+---------------------------------------------+\n";
     cout << "\nEscolha a opcao e pressione ENTER:";
@@ -513,83 +513,65 @@ void GestaoA::drawNumberOfCountries(const string &code) {
     cout << "+---------+-----------+\n";
 }
 
-struct Distance{
-    string airport;
-    int distance;
-
-    bool operator<(const Distance &b) const{
-        return airport < b.airport;
-    }
-};
-
 /**
  * Busca todos os aeroportos diferentes acessíveis a partir do inicial e dentro de y voos (usa BFS).
- * Complexidade Temporal O(n^4).
+ * Complexidade Temporal O(n^2).
  * @param code
  * @param y
  * @return um set de strings com o código dos aeroportos que são acessíveis a partir do inicial
  */
-set<string> GestaoA::Yairports(string code, int y) { //TODO
-    vector<Graph::Airport> sup = getAirports();
+set<int> GestaoA::Yairports(string code, int y) { //TODO
     queue<int> search;
-    set<Distance> aux;
-    set<string> airportsReached;
+    set<int> aux;
+    set<int> airportsReached;
     search.push(flightNetwork_.getAirportInfo(code));
-    Distance a;
-    a.airport = code;
-    a.distance = 0;
-    aux.insert(a);
 
     for(auto &help: flightNetwork_.airports){
         help.visited = false;
+        help.dist = -1;
     }
+    flightNetwork_.airports[flightNetwork_.getAirportInfo(code)].dist = 0;
+    flightNetwork_.airports[flightNetwork_.getAirportInfo(code)].visited = true;
+    bool flag = false;
+
 
     while(!search.empty()){
         int currkey = search.front();
-        for(auto i: sup){
-            if(flightNetwork_.getAirportCode(currkey) == i.code && flightNetwork_.airports[currkey].visited == false){
-                flightNetwork_.airports[currkey].visited = true;
-                for(auto flight: i.flights){
-                    Distance f;
-                    for(auto j: aux){
-                        if(i.code == j.airport){
-                            f.airport = flightNetwork_.getAirportCode(flight.dest);
-                            f.distance = j.distance + 1;
-                        }
-                    }
-                    search.push(flight.dest);
-                    aux.insert(f);
-                }
+        for(auto flight: flightNetwork_.airports[currkey].flights){
+            if(!flightNetwork_.airports[flight.dest].visited){
+                flightNetwork_.airports[flight.dest].visited = true;
+                search.push(flight.dest);
+                aux.insert(flight.dest);
+                flightNetwork_.airports[flight.dest].dist = flightNetwork_.airports[currkey].dist + 1;
+                if(flightNetwork_.airports[flight.dest].dist > y){flag = true;}
             }
         }
         search.pop();
-        if(aux.rbegin()->distance > y){break;}
+        if (flag) {break;}
     }
+
+
     for(auto k: aux){
-        if(k.airport == code || k.distance > y){continue;}
-        else{airportsReached.insert(k.airport);}
+        if(k == flightNetwork_.getAirportInfo(code) || flightNetwork_.airports[k].dist > y){continue;}
+        else{airportsReached.insert(k);}
     }
     return airportsReached;
 }
 
 /**
  * Busca todas as cidades diferentes acessíveis a partir de um aeroporto inicial e dentro de y voos (Chama a função Yairports, logo usa BFS).
- * Complexidade Temporal O(n^4).
+ * Complexidade Temporal O(n^2).
  * @param code
  * @param y
  * @return um set da classe CityCountry de forma a verificar se cidades com o mesmo nome podem ser de países diferentes
  */
 set<CityCountry> GestaoA::Ycities(string code, int y) { //TODO
-    set<string> airportsReached = Yairports(code, y);
+    set<int> airportsReached = Yairports(code, y);
     set<CityCountry> citiesReached;
 
     for(auto i: airportsReached){
-        for(auto j: flightNetwork_.airports){
-            if(i == j.code){
-                CityCountry cc(j.city, j.country);
-                citiesReached.insert(cc);
-            }
-        }
+        CityCountry cc(flightNetwork_.airports[i].city, flightNetwork_.airports[i].country);
+        citiesReached.insert(cc);
     }
 
     return citiesReached;
@@ -597,21 +579,17 @@ set<CityCountry> GestaoA::Ycities(string code, int y) { //TODO
 
 /**
  * Busca todos os países diferentes acessíveis a partir de um aeroporto inicial e dentro de y voos (Chama a função Yairports, logo usa BFS).
- * Complexidade Temporal O(n^4).
+ * Complexidade Temporal O(n^2).
  * @param code
  * @param y
  * @return um set de strings com os países acessíveis
  */
 set<string> GestaoA::Ycountries(string code, int y) { //TODO
-    set<string> airportsReached = Yairports(code, y);
+    set<int> airportsReached = Yairports(code, y);
     set<string> countriesReached;
 
     for(auto i: airportsReached){
-        for(auto j: flightNetwork_.airports){
-            if(i == j.code){
-                countriesReached.insert(j.country);
-            }
-        }
+        countriesReached.insert(flightNetwork_.airports[i].country);
     }
 
     return countriesReached;
@@ -619,12 +597,12 @@ set<string> GestaoA::Ycountries(string code, int y) { //TODO
 
 /**
  * Desenha uma tabela com o código do aeroporto inicial e o número de destinos acessíveis a partir desse.
- * Complexidade Temporal O(n^4) (chama Yairports).
+ * Complexidade Temporal O(n^2) (chama Yairports).
  * @param code
  * @param y
  */
 void GestaoA::drawYairports(string code, int y) {
-    set<string> airportsReached = Yairports(code, y);
+    set<int> airportsReached = Yairports(code, y);
 
     int size = airportsReached.size();
     string helpme;
@@ -635,14 +613,17 @@ void GestaoA::drawYairports(string code, int y) {
     cout << "|   " << code << "   |";
 
     if(size < 10){
-        helpme = "00" + to_string(size);
+        helpme = "000" + to_string(size);
     }
     else if(size >= 10 && size < 100){
+        helpme = "00" + to_string(size);
+    }
+    else if(size >= 100 && size < 1000){
         helpme = "0" + to_string(size);
     }
     else{helpme = to_string(size);}
 
-    pair<int, int> pad = auxCenterDraw(12 - helpme.length(), helpme.length()%2 == 1);
+    pair<int, int> pad = auxCenterDraw(12 - helpme.length(), helpme.length()%2 == 0);
     for (int f = 0; f < pad.first; f++) {
         cout << " ";
         ++f;
@@ -658,7 +639,7 @@ void GestaoA::drawYairports(string code, int y) {
 
 /**
  * Desenha uma tabela com o código do aeroporto inicial e o número de cidades acessíveis.
- * Complexidade Temporal O(n^4) (chama Ycities que por sua vez chama Yairports).
+ * Complexidade Temporal O(n^2) (chama Ycities que por sua vez chama Yairports).
  * @param code
  * @param y
  */
@@ -697,7 +678,7 @@ void GestaoA::drawYcities(string code, int y) {
 
 /**
  * Desenha uma tabela com o código do aeroporto inicial e o número de países acessíveis.
- * Complexidade Temporal O(n^4) (chama Ycountries que por sua vez chama Yairports).
+ * Complexidade Temporal O(n^2) (chama Ycountries que por sua vez chama Yairports).
  * @param code
  * @param y
  */

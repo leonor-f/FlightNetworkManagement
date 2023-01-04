@@ -29,6 +29,7 @@ public:
         long double latitude;  // latitude
         long double longitude; // longitude
         bool visited;          // para futuras pesquisas
+        int dist;              // dist to source node
     };
 
     Graph();          // default constructor

@@ -115,4 +115,5 @@ void Graph::setNode(const string &code, const string &name, const string &city,
     airports.at(airportIndex).latitude = latitude;
     airports.at(airportIndex).longitude = longitude;
     airports.at(airportIndex).visited = false;
+    airports.at(airportIndex).dist = -1;
 }

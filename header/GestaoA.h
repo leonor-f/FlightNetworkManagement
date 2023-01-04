@@ -62,7 +62,7 @@ class GestaoA {
         void drawYcities(string code, int y);
         void drawYcountries(string code, int y);
 
-        set<string> Yairports(string code, int y);
+        set<int> Yairports(string code, int y);
         set<CityCountry> Ycities(string code, int y);
         set<string> Ycountries(string code, int y);
         static bool ordenar();
