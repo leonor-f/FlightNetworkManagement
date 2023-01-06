@@ -21,7 +21,7 @@ public:
     };
 
     struct Airport {
-        list<Flight> flights;  // lista de flights/edges deste aeroporto
+        list<Flight> flights;  // lista de flights/edges deste aeroporto (adjacências)
         string code;           // código
         string name;           // nome
         string city;           // cidade
@@ -56,6 +56,9 @@ public:
     list<pair<int, string>> getAirportFlights(const string& code) const;
     const map<string, int>& getAirportsInfo() const;
     int getAirportInfo(const string& code) const;
+    list<Airport> getAirportsByCityCountry(const CityCountry &city);
+    set<string> getAirlinesFromAirport(const string &code) const;
+    void shortestPath(const string &src, const string &destination);
 
     // setters
 
