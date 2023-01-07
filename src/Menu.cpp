@@ -31,3 +31,15 @@ void Menu::aeroportoNaoExiste() {
             "|O aeroporto indicado nao existe|\n"
             "+-------------------------------+\n";
 }
+
+void Menu::CountryNotFound() {
+    cout << "\n+--------------------------+\n"
+            "|O pais indicado nao existe|\n"
+            "+--------------------------+\n";
+}
+
+void Menu::CityNotFound() {
+    cout << "\n+----------------------------+\n"
+            "|A cidade indicada nao existe|\n"
+            "+----------------------------+\n";
+}

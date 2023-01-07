@@ -147,8 +147,8 @@ static double haversine(double lat1, double lon1, double lat2, double lon2) {
     return round(rad * c);
 }
 
-/*!
- * calcula a distância mínima entre 2 aeroportos, bem como o caminho (voo) mais curto entre eles
+/**
+ * calcula a distância mínima entre 2 aeroportos, bem como o caminho (voo) mais curto entre eles.
  * @param src
  * @param destination
  */
@@ -195,7 +195,7 @@ void Graph::shortestPath(const string &src, const string &destination) {
     if (airports[getAirportInfo(destination)].visited) {
         while (pre != src) {
             path.push_back(pre);
-            pre = predecessor[pre];
+            //pre = predecessor[pre];
         }
     } else {
         cout << "Não existe nenhum voo entre os aeroportos selecionados" << endl;
@@ -214,32 +214,4 @@ void Graph::shortestPath(const string &src, const string &destination) {
         else cout << *it << endl;
     }
     cout << "Distância total do voo = " << distance << " km" << endl;
-}
-
-/*!
- * procura os aeroportos de uma determinada cidade
- * complexidade temporal O(n)
- * @param city
- * @return uma lista com os códigos dos aeroportos encontrados
- */
-list<Graph::Airport> Graph::getAirportsByCityCountry(const CityCountry &city) {
-    list<Airport> aux;
-    for (int i = 1; i <= n; i++) {
-        if (airports[i].city == city.getCity() && airports[i].country == city.getCountry())
-            aux.push_back(airports[i]);
-    }
-    return aux;
-}
-
-/*!
- * procura o conjunto de companhias que apresentam voos num determinado aeroporto
- * complexidade temporal O(n)
- * @param code
- * @return um set com os códigos das companhias encontradas
- */
-set<string> Graph::getAirlinesFromAirport(const string &code) const {
-    set<string> aux;
-    for (auto &airport: airports[getAirportInfo(code)].flights)
-        aux.insert(airport.airline);
-    return aux;
 }

@@ -45,8 +45,10 @@ class GestaoA {
 
         static pair<int, int> auxCenterDraw(int n, bool v);
         static void drawMenu();
+        static void drawListagemMenu();
         static void drawNumberMenu();
         static void drawYMenu();
+        static void drawDiameterMenu();
         void drawCity(const CityCountry& cc, bool header) const;
         void drawCities(const vector<CityCountry>& citiesaux) const;
         void drawAirport(const string& code, bool header);
@@ -58,14 +60,23 @@ class GestaoA {
         void drawNumberOfAirlines(const string& code);
         void drawNumberOfTargets(const string& code);
         void drawNumberOfCountries(const string& code);
-        void drawYairports(string code, int y);
-        void drawYcities(string code, int y);
-        void drawYcountries(string code, int y);
+        void drawYairports(const string &code, int y);
+        void drawYcities(const string &code, int y);
+        void drawYcountries(const string &code, int y);
+        void bfsDiameter(int v);
+        void drawDiameter();
+        void drawDiameterCountry(const string &country);
+        void drawAirportsByCityCountry(const string &cc);
+        void drawAirlinesByAirport(const string &code);
 
-        set<int> Yairports(string code, int y);
-        set<CityCountry> Ycities(string code, int y);
-        set<string> Ycountries(string code, int y);
+        set<int> Yairports(const string &code, int y);
+        set<CityCountry> Ycities(const string &code, int y);
+        set<string> Ycountries(const string &code, int y);
         static bool ordenar();
+
+        list<Graph::Airport> getAirportsByCityCountry(const string &city) const;
+        set<string> getAirlinesFromAirport(const string &code) const;
+
 
         void setMaxCityLength(int maxLength_);
         void setMaxCountryLength(int maxLength_);
@@ -82,6 +93,8 @@ class GestaoA {
         int getMaxAirportNameLength() const;
         int getMaxAirlineNameLength() const;
         int getMaxAirlineCountryLength() const;
+        bool findCountry(const string &country);
+        bool findCity(const string &cc);
 
     private:
         tabHcities cities;

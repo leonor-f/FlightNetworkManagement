@@ -1,5 +1,7 @@
 #include "../header/CityCountry.h"
 
+CityCountry::CityCountry() {city_ = ""; country_ = "";}
+
 CityCountry::CityCountry(const string& city, const string& country) {
     city_ = city;
     country_ = country;
@@ -8,6 +10,10 @@ CityCountry::CityCountry(const string& city, const string& country) {
 string CityCountry::getCity() const { return city_; }
 
 string CityCountry::getCountry() const { return country_; }
+
+void CityCountry::setCity(const string &city) {city_ = city;}
+
+void CityCountry::setCountry(const string &country) {country_ = country;}
 
 bool CityCountry::operator==(const CityCountry &t) const {
     if((city_ == t.getCity() && country_ != t.getCountry()) || city_ != t.getCity()){return false;}
