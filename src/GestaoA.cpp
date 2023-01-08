@@ -92,7 +92,7 @@ void GestaoA::readAirports() {
 }
 
 /**
- *
+ * Lê o ficheiro de voos e cria o grafo.
  * Complexidade Temporal O(n) (n é o tamanho do ficheiro retirando o cabeçalho).
  */
 void GestaoA::readFlights() {
@@ -1086,7 +1086,7 @@ void GestaoA::drawListArticulationPoints() {
 }
 
 /*!
- * Depth-First Search para calcular os pontos de articulação
+ * Depth-First Search para calcular os pontos de articulação.
  * Complexidade Temporal O(|V|+|E|).
  * @param v
  * @param aux

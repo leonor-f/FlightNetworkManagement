@@ -259,7 +259,7 @@ void Graph::auxLocal(long double lat1, long double long1, long double lat2, long
  * @param indexDest
  * @param valuesPath
  * @param possiblePaths
- * @return
+ * @return valor booleano que indica a validade do caminho.
  */
 bool Graph::isWayPossible(int indexSrc, int indexDest, vector<infoFlight> &valuesPath, vector<infoFlight> &possiblePaths) {
     string auxFrom = airports.at(indexSrc).code;

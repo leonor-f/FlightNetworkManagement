@@ -145,8 +145,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a09ca91d547b4dd645b0b6f7d50f4452a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7da7b27165d2efd2b8ac16425590ae72"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gestao_a.html#a7da7b27165d2efd2b8ac16425590ae72">drawAirlinesByAirport</a> (const string &amp;code) const</td></tr>
 <tr class="separator:a7da7b27165d2efd2b8ac16425590ae72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af0ef70490d91b7cb61ce10a1d1565e09"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gestao_a.html#af0ef70490d91b7cb61ce10a1d1565e09">drawTopKairportByFlights</a> (int k)</td></tr>
-<tr class="separator:af0ef70490d91b7cb61ce10a1d1565e09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93b2c1b9aac391ef8d5ae05697bfc855"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gestao_a.html#a93b2c1b9aac391ef8d5ae05697bfc855">dfsArticulationPoints</a> (int v, stack&lt; int &gt; &amp;aux, list&lt; int &gt; &amp;art, int index, int &amp;nArt)</td></tr>
+<tr class="separator:a93b2c1b9aac391ef8d5ae05697bfc855"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4200fa70ac90f3dfb4caa6ee34443215"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gestao_a.html#a4200fa70ac90f3dfb4caa6ee34443215">drawArticulationPoints</a> ()</td></tr>
+<tr class="separator:a4200fa70ac90f3dfb4caa6ee34443215"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71210f3e65b3745d702790c6cfce0453"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gestao_a.html#a71210f3e65b3745d702790c6cfce0453">drawListArticulationPoints</a> ()</td></tr>
+<tr class="separator:a71210f3e65b3745d702790c6cfce0453"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4245ea7c9efb9e962825acc3e7c4bef0"><td class="memItemLeft" align="right" valign="top">set&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gestao_a.html#a4245ea7c9efb9e962825acc3e7c4bef0">yAirports</a> (const string &amp;code, int y)</td></tr>
 <tr class="separator:a4245ea7c9efb9e962825acc3e7c4bef0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac2acfeaae33bd3b839e393534496fb2b"><td class="memItemLeft" align="right" valign="top">set&lt; <a class="el" href="class_city_country.html">CityCountry</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gestao_a.html#ac2acfeaae33bd3b839e393534496fb2b">yCities</a> (const string &amp;code, int y)</td></tr>
@@ -204,6 +208,8 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:af62f4ebd788a4d892787080f460d123c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abdc1f0454e33d8885c055c1380cbdf42"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gestao_a.html#abdc1f0454e33d8885c055c1380cbdf42">drawAirlineMenu</a> ()</td></tr>
 <tr class="separator:abdc1f0454e33d8885c055c1380cbdf42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf9d0a7a7e3e7138a6caad17cff5c6b6"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gestao_a.html#aaf9d0a7a7e3e7138a6caad17cff5c6b6">drawAPMenu</a> ()</td></tr>
+<tr class="separator:aaf9d0a7a7e3e7138a6caad17cff5c6b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a895f70db7ecdc80b7fe47a6b91385a53"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gestao_a.html#a895f70db7ecdc80b7fe47a6b91385a53">ordenar</a> ()</td></tr>
 <tr class="separator:a895f70db7ecdc80b7fe47a6b91385a53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -357,6 +363,62 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>o diâmetro máximo a partir do node v. </dd></dl>
+
+</div>
+</div>
+<a id="a93b2c1b9aac391ef8d5ae05697bfc855" name="a93b2c1b9aac391ef8d5ae05697bfc855"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93b2c1b9aac391ef8d5ae05697bfc855">&#9670;&#160;</a></span>dfsArticulationPoints()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GestaoA::dfsArticulationPoints </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>v</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">stack&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>aux</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">list&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>art</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>nArt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Depth-First Search para calcular os pontos de articulação. Complexidade Temporal O(|V|+|E|). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td></td></tr>
+    <tr><td class="paramname">aux</td><td></td></tr>
+    <tr><td class="paramname">art</td><td></td></tr>
+    <tr><td class="paramname">index</td><td></td></tr>
+    <tr><td class="paramname">nArt</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -549,6 +611,50 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="aaf9d0a7a7e3e7138a6caad17cff5c6b6" name="aaf9d0a7a7e3e7138a6caad17cff5c6b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf9d0a7a7e3e7138a6caad17cff5c6b6">&#9670;&#160;</a></span>drawAPMenu()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GestaoA::drawAPMenu </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Desenha um menu secundário para mais opções. Complexidade Temporal O(1). </p>
+
+</div>
+</div>
+<a id="a4200fa70ac90f3dfb4caa6ee34443215" name="a4200fa70ac90f3dfb4caa6ee34443215"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4200fa70ac90f3dfb4caa6ee34443215">&#9670;&#160;</a></span>drawArticulationPoints()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GestaoA::drawArticulationPoints </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Desenha o número de pontos de articulação do grafo geral. Complexidade Temporal O(|V|+|V|*(|V|+|E|)). </p>
 
 </div>
 </div>
@@ -797,6 +903,24 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a71210f3e65b3745d702790c6cfce0453" name="a71210f3e65b3745d702790c6cfce0453"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71210f3e65b3745d702790c6cfce0453">&#9670;&#160;</a></span>drawListArticulationPoints()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GestaoA::drawListArticulationPoints </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Desenha os pontos de articulação do grafo geral. Complexidade Temporal O(|V|+|V|*(|V|+|E|)). </p>
+
+</div>
+</div>
 <a id="ad3140bd83e3d260ca374c3f907867215" name="ad3140bd83e3d260ca374c3f907867215"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad3140bd83e3d260ca374c3f907867215">&#9670;&#160;</a></span>drawMenu()</h2>
 
@@ -918,24 +1042,6 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<a id="af0ef70490d91b7cb61ce10a1d1565e09" name="af0ef70490d91b7cb61ce10a1d1565e09"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af0ef70490d91b7cb61ce10a1d1565e09">&#9670;&#160;</a></span>drawTopKairportByFlights()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void GestaoA::drawTopKairportByFlights </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>k</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
 
 </div>
 </div>
@@ -1349,7 +1455,7 @@ Static Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Complexidade Temporal O(n) (n é o tamanho do ficheiro retirando o cabeçalho). </p>
+<p>Lê o ficheiro de voos e cria o grafo. Complexidade Temporal O(n) (n é o tamanho do ficheiro retirando o cabeçalho). </p>
 
 </div>
 </div>
@@ -1552,8 +1658,8 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>header/<a class="el" href="_gestao_a_8h_source.html">GestaoA.h</a></li>
-<li>src/<a class="el" href="_gestao_a_8cpp.html">GestaoA.cpp</a></li>
+<li>C:/Users/gonca/OneDrive/Aulas/projeto_aed_2/header/<a class="el" href="_gestao_a_8h_source.html">GestaoA.h</a></li>
+<li>C:/Users/gonca/OneDrive/Aulas/projeto_aed_2/src/<a class="el" href="_gestao_a_8cpp.html">GestaoA.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
