@@ -3,6 +3,7 @@
 #include <iostream>
 #include <set>
 #include <queue>
+#include <stack>
 #include <algorithm>
 #include "../header/Airline.h"
 #include "../header/Graph.h"
@@ -39,8 +40,8 @@ void GestaoA::readAirlines() {
         getline(stream, callSign, ',');
         getline(stream, country, '\r');
 
-        if (name.length() > getMaxAirlineNameLength()) setMaxAirlineNameLength((int)name.length());
-        if (country.length() > getMaxAirlineCountryLength()) setMaxAirlineCountryLength((int)country.length());
+        if (name.length() > getMaxAirlineNameLength()) setMaxAirlineNameLength((int) name.length());
+        if (country.length() > getMaxAirlineCountryLength()) setMaxAirlineCountryLength((int) country.length());
 
         Airline airline = Airline(code, name, callSign, country);
         airlines.insert(airline);
@@ -79,13 +80,13 @@ void GestaoA::readAirports() {
 
         CityCountry cc(city, country);
         cityset.insert(cc);
-        if (city.length() > getMaxCityLength()) setMaxCityLength((int)city.length());
-        if (country.length() > getMaxCountryLength()) setMaxCountryLength((int)country.length());
-        if (name.length() > getMaxAirportNameLength()) setMaxAirportNameLength((int)name.length());
+        if (city.length() > getMaxCityLength()) setMaxCityLength((int) city.length());
+        if (country.length() > getMaxCountryLength()) setMaxCountryLength((int) country.length());
+        if (name.length() > getMaxAirportNameLength()) setMaxAirportNameLength((int) name.length());
 
         flightNetwork_.setNode(code, name, city, country, latitudeLD, longitudeLD);
     }
-    for (const auto& i: cityset)
+    for (const auto &i: cityset)
         cities.insert(i);
     ifs2.close();
 }
@@ -127,9 +128,9 @@ void GestaoA::readFlights() {
 pair<int, int> GestaoA::auxCenterDraw(int n, bool v) {
     int pad1 = n;
     int pad2;
-    if (v) pad2 = pad1+1;
+    if (v) pad2 = pad1 + 1;
     else pad2 = pad1;
-    return pair<int, int> {pad1, pad2};
+    return pair<int, int>{pad1, pad2};
 }
 
 /**
@@ -145,6 +146,7 @@ void GestaoA::drawMenu() {
             "| [3] - Destinos com maximo de Y voos         |\n" // irá abrir novo menu
             "| [4] - Diametros                             |\n" // irá abrir novo menu
             "| [5] - Viajar entre dois locais              |\n" // irá abrir novo menu
+            "| [6] - Pontos de articulacao                 |\n" // irá abrir novo menu
             "| [Q] - Sair da aplicacao                     |\n"
             "+---------------------------------------------+\n";
     cout << "\nEscolha a opcao e pressione ENTER:";
@@ -248,19 +250,35 @@ void GestaoA::drawAirlineMenu() {
 }
 
 /**
+ * Desenha um menu secundário para mais opções.
+ * Complexidade Temporal O(1).
+ */
+void GestaoA::drawAPMenu() {
+    cout << "\n+---------------------------------------------------+\n"
+            "|                GESTAO DE AEROPORTOS               |\n"
+            "+---------------------------------------------------+\n"
+            "| [1] - Numero de pontos de articulacao             |\n"
+            "| [2] - Listagem dos pontos de articulacao          |\n"
+            "| [V] - Voltar                                      |\n"
+            "+---------------------------------------------------+\n";
+    cout << "\nEscolha a opcao e pressione ENTER:";
+}
+
+/**
  * Desenha uma cidade (parâmetro cc) e identifica se é a 1ª cidade a ser escrita para desenhar o cabeçalho da tabela (parâmetro header).
  * Complexidade Temporal O(n).
  * @param cc
  * @param header
  */
-void GestaoA::drawCity(const CityCountry& cc, bool header) const {
+void GestaoA::drawCity(const CityCountry &cc, bool header) const {
     if (header) {
         cout << "\n+-------------------------------+---------------------------------+\n"
                 "|             CITY              |             COUNTRY             |\n"
                 "+-------------------------------+---------------------------------+\n";
-        }
+    }
     cout << "|";
-    pair<int, int> pad = auxCenterDraw(getMaxCityLength() - (int)cc.getCity().length(), (int)cc.getCity().length()%2 == 0);
+    pair<int, int> pad = auxCenterDraw(getMaxCityLength() - (int) cc.getCity().length(),
+                                       (int) cc.getCity().length() % 2 == 0);
     for (int f = 0; f < pad.first; f++) {
         cout << " ";
         ++f;
@@ -271,7 +289,8 @@ void GestaoA::drawCity(const CityCountry& cc, bool header) const {
         ++e;
     }
     cout << "|";
-    pair<int, int> padCountry = auxCenterDraw(getMaxCountryLength() - (int)cc.getCountry().length(), (int)cc.getCountry().length()%2 == 0);
+    pair<int, int> padCountry = auxCenterDraw(getMaxCountryLength() - (int) cc.getCountry().length(),
+                                              (int) cc.getCountry().length() % 2 == 0);
     for (int f = 0; f < padCountry.first; f++) {
         cout << " ";
         ++f;
@@ -289,9 +308,9 @@ void GestaoA::drawCity(const CityCountry& cc, bool header) const {
  * Complexidade Temporal O(n^2).
  * @param citiesaux
  */
-void GestaoA::drawCities(const vector<CityCountry>& citiesaux) const {
+void GestaoA::drawCities(const vector<CityCountry> &citiesaux) const {
     bool v = true;
-    for (const CityCountry& s : citiesaux) {
+    for (const CityCountry &s: citiesaux) {
         drawCity(s, v);
         v = false;
     }
@@ -304,14 +323,15 @@ void GestaoA::drawCities(const vector<CityCountry>& citiesaux) const {
  * @param code
  * @param header
  */
-void GestaoA::drawAirport(const string& code, bool header) {
+void GestaoA::drawAirport(const string &code, bool header) {
     if (header) {
         cout << "\n+-----+--------------------------------------------------------+---------------------------------+\n"
                 "| COD |                          NAME                          |             COUNTRY             |\n"
                 "+-----+--------------------------------------------------------+---------------------------------+\n";
     }
     cout << "| " << code << " |";
-    pair<int, int> pad = auxCenterDraw(getMaxAirportNameLength() - (int)flightNetwork_.getAirportName(code).length(), (int)flightNetwork_.getAirportName(code).length()%2 == 1);
+    pair<int, int> pad = auxCenterDraw(getMaxAirportNameLength() - (int) flightNetwork_.getAirportName(code).length(),
+                                       (int) flightNetwork_.getAirportName(code).length() % 2 == 1);
     for (int f = 0; f < pad.first; f++) {
         cout << " ";
         ++f;
@@ -322,7 +342,9 @@ void GestaoA::drawAirport(const string& code, bool header) {
         ++e;
     }
     cout << "|";
-    pair<int, int> padCountry = auxCenterDraw(getMaxCountryLength() - (int)flightNetwork_.getAirportCountry(code).length(), (int)flightNetwork_.getAirportCountry(code).length()%2 == 0);
+    pair<int, int> padCountry = auxCenterDraw(
+            getMaxCountryLength() - (int) flightNetwork_.getAirportCountry(code).length(),
+            (int) flightNetwork_.getAirportCountry(code).length() % 2 == 0);
     for (int f = 0; f < padCountry.first; f++) {
         cout << " ";
         ++f;
@@ -340,7 +362,7 @@ void GestaoA::drawAirport(const string& code, bool header) {
  * Complexidade Temporal O(n^2).
  * @param airports
  */
-void GestaoA::drawAirports(const vector<string>& airports) {
+void GestaoA::drawAirports(const vector<string> &airports) {
     bool v = true;
     for (int i = 1; i < airports.size(); i++) {
         drawAirport(airports.at(i), v);
@@ -355,14 +377,15 @@ void GestaoA::drawAirports(const vector<string>& airports) {
  * @param a
  * @param header
  */
-void GestaoA::drawAirline(const Airline& a, bool header) const {
+void GestaoA::drawAirline(const Airline &a, bool header) const {
     if (header) {
         cout << "\n+-----+------------------------------------------+--------------------------------------+\n"
                 "| COD |                  NAME                    |                COUNTRY               |\n"
                 "+-----+------------------------------------------+--------------------------------------+\n";
     }
     cout << "| " << a.getCode() << " |";
-    pair<int, int> pad = auxCenterDraw(getMaxAirlineNameLength() - (int)a.getName().length(), (int)a.getName().length()%2 == 1);
+    pair<int, int> pad = auxCenterDraw(getMaxAirlineNameLength() - (int) a.getName().length(),
+                                       (int) a.getName().length() % 2 == 1);
     for (int f = 0; f < pad.first; f++) {
         cout << " ";
         ++f;
@@ -373,7 +396,8 @@ void GestaoA::drawAirline(const Airline& a, bool header) const {
         ++e;
     }
     cout << "|";
-    pair<int, int> padCountry = auxCenterDraw(getMaxAirlineCountryLength() - (int)a.getCountry().length(), (int)a.getCountry().length()%2 == 1);
+    pair<int, int> padCountry = auxCenterDraw(getMaxAirlineCountryLength() - (int) a.getCountry().length(),
+                                              (int) a.getCountry().length() % 2 == 1);
     for (int f = 0; f < padCountry.first; f++) {
         cout << " ";
         ++f;
@@ -391,9 +415,9 @@ void GestaoA::drawAirline(const Airline& a, bool header) const {
  * Complexidade Temporal O(n^2).
  * @param airlinesaux
  */
-void GestaoA::drawAirlines(const vector<Airline>& airlinesaux) const {
+void GestaoA::drawAirlines(const vector<Airline> &airlinesaux) const {
     bool v = true;
-    for (const Airline& s: airlinesaux) {
+    for (const Airline &s: airlinesaux) {
         drawAirline(s, v);
         v = false;
     }
@@ -407,14 +431,15 @@ void GestaoA::drawAirlines(const vector<Airline>& airlinesaux) const {
  * @param airline
  * @param header
  */
-void GestaoA::drawFlight(const string& name, const string& airline, bool header) const {
+void GestaoA::drawFlight(const string &name, const string &airline, bool header) const {
     if (header) {
-        cout << "\n+--------------------------------------------------------+------------------------------------------+\n"
-                "|                   AIRPORT DESTINATION                  |                  AIRLINE                 |\n"
-                "+--------------------------------------------------------+------------------------------------------+\n";
+        cout
+                << "\n+--------------------------------------------------------+------------------------------------------+\n"
+                   "|                   AIRPORT DESTINATION                  |                  AIRLINE                 |\n"
+                   "+--------------------------------------------------------+------------------------------------------+\n";
     }
     cout << "|";
-    pair<int, int> pad = auxCenterDraw(getMaxAirportNameLength() - (int)name.length(), (int)name.length()%2 == 1);
+    pair<int, int> pad = auxCenterDraw(getMaxAirportNameLength() - (int) name.length(), (int) name.length() % 2 == 1);
     for (int f = 0; f < pad.first; f++) {
         cout << " ";
         ++f;
@@ -425,7 +450,7 @@ void GestaoA::drawFlight(const string& name, const string& airline, bool header)
         ++e;
     }
     cout << "|";
-    pad = auxCenterDraw(getMaxAirlineNameLength() - (int)airline.length(), (int)airline.length()%2 == 1);
+    pad = auxCenterDraw(getMaxAirlineNameLength() - (int) airline.length(), (int) airline.length() % 2 == 1);
     for (int f = 0; f < pad.first; f++) {
         cout << " ";
         ++f;
@@ -443,13 +468,13 @@ void GestaoA::drawFlight(const string& name, const string& airline, bool header)
  * Complexidade Temporal O(n^2).
  * @param code
  */
-void GestaoA::drawFlights(const string& code) {
+void GestaoA::drawFlights(const string &code) {
     bool v = true;
     list<pair<int, string>> airportFlights = flightNetwork_.getAirportFlights(code);
     for (const auto &flight: airportFlights) {
         string cd = flightNetwork_.getAirportName(flight.first);
         string airlinename;
-        for (const auto& airline: airlines) if (airline.getCode() == flight.second) airlinename = airline.getName();
+        for (const auto &airline: airlines) if (airline.getCode() == flight.second) airlinename = airline.getName();
         drawFlight(cd, airlinename, v);
         v = false;
     }
@@ -467,8 +492,8 @@ void GestaoA::drawNumberOfAirlines(const string &code) {
     int size;
     string helpme;
 
-    for (const auto& i: aux) temp.insert(i.second);
-    size = (int)temp.size();
+    for (const auto &i: aux) temp.insert(i.second);
+    size = (int) temp.size();
     if (size < 10) helpme = "0" + to_string(size);
     else helpme = to_string(size);
 
@@ -477,7 +502,7 @@ void GestaoA::drawNumberOfAirlines(const string &code) {
             "+---------+----------+\n";
 
     cout << "|   " << code << "   |";
-    pair<int, int> pad = auxCenterDraw(9 - (int)helpme.length(), helpme.length()%2 == 1);
+    pair<int, int> pad = auxCenterDraw(9 - (int) helpme.length(), helpme.length() % 2 == 1);
     for (int f = 0; f < pad.first; f++) {
         cout << " ";
         ++f;
@@ -502,9 +527,9 @@ void GestaoA::drawNumberOfTargets(const string &code) {
     int size;
     string helpme;
 
-    for (const auto& i: aux) temp.insert(flightNetwork_.getAirportCode(i.first));
+    for (const auto &i: aux) temp.insert(flightNetwork_.getAirportCode(i.first));
 
-    size = (int)temp.size();
+    size = (int) temp.size();
     if (size < 10) helpme = "00" + to_string(size);
     else if (size >= 10 && size < 100) helpme = "0" + to_string(size);
     else helpme = to_string(size);
@@ -513,7 +538,7 @@ void GestaoA::drawNumberOfTargets(const string &code) {
             "| AIRPORT | DESTINATION |\n"
             "+---------+-------------+\n";
     cout << "|   " << code << "   |";
-    pair<int, int> pad = auxCenterDraw(12 - (int)helpme.length(), helpme.length()%2 == 1);
+    pair<int, int> pad = auxCenterDraw(12 - (int) helpme.length(), helpme.length() % 2 == 1);
     for (int f = 0; f < pad.first; f++) {
         cout << " ";
         ++f;
@@ -538,9 +563,9 @@ void GestaoA::drawNumberOfCountries(const string &code) {
     int size;
     string helpme;
 
-    for (const auto& i: aux) temp.insert(flightNetwork_.getAirportCountry(i.first));
+    for (const auto &i: aux) temp.insert(flightNetwork_.getAirportCountry(i.first));
 
-    size = (int)temp.size();
+    size = (int) temp.size();
     if (size < 10) helpme = "0" + to_string(size);
     else helpme = to_string(size);
 
@@ -548,7 +573,7 @@ void GestaoA::drawNumberOfCountries(const string &code) {
             "| AIRPORT | COUNTRIES |\n"
             "+---------+-----------+\n";
     cout << "|   " << code << "   |";
-    pair<int, int> pad = auxCenterDraw(10 - (int)helpme.length(), helpme.length()%2 == 0);
+    pair<int, int> pad = auxCenterDraw(10 - (int) helpme.length(), helpme.length() % 2 == 0);
     for (int f = 0; f < pad.first; f++) {
         cout << " ";
         ++f;
@@ -586,7 +611,7 @@ set<int> GestaoA::yAirports(const string &code, int y) {
 
     while (!search.empty()) {
         int currkey = search.front();
-        for (const auto& flight: flightNetwork_.airports[currkey].flights) {
+        for (const auto &flight: flightNetwork_.airports[currkey].flights) {
             if (!flightNetwork_.airports[flight.dest].visited) {
                 flightNetwork_.airports[flight.dest].visited = true;
                 search.push(flight.dest);
@@ -600,7 +625,7 @@ set<int> GestaoA::yAirports(const string &code, int y) {
     }
 
 
-    for (auto k: aux){
+    for (auto k: aux) {
         if (k == flightNetwork_.getAirportInfo(code) || flightNetwork_.airports[k].dist > y) continue;
         else airportsReached.insert(k);
     }
@@ -649,7 +674,7 @@ set<string> GestaoA::yCountries(const string &code, int y) {
 void GestaoA::drawYAirports(const string &code, int y) {
     set<int> airportsReached = yAirports(code, y);
 
-    int size = (int)airportsReached.size();
+    int size = (int) airportsReached.size();
     string helpme;
 
     cout << "\n+---------+-------------+\n"
@@ -658,11 +683,11 @@ void GestaoA::drawYAirports(const string &code, int y) {
     cout << "|   " << code << "   |";
 
     if (size < 10) helpme = "000" + to_string(size);
-    else if(size >= 10 && size < 100) helpme = "00" + to_string(size);
-    else if(size >= 100 && size < 1000)helpme = "0" + to_string(size);
+    else if (size >= 10 && size < 100) helpme = "00" + to_string(size);
+    else if (size >= 100 && size < 1000)helpme = "0" + to_string(size);
     else helpme = to_string(size);
 
-    pair<int, int> pad = auxCenterDraw(12 - (int)helpme.length(), helpme.length()%2 == 0);
+    pair<int, int> pad = auxCenterDraw(12 - (int) helpme.length(), helpme.length() % 2 == 0);
     for (int f = 0; f < pad.first; f++) {
         cout << " ";
         ++f;
@@ -685,7 +710,7 @@ void GestaoA::drawYAirports(const string &code, int y) {
 void GestaoA::drawYCities(const string &code, int y) {
     set<CityCountry> citiesReached = yCities(code, y);
 
-    int size = (int)citiesReached.size();
+    int size = (int) citiesReached.size();
     string helpme;
 
     cout << "\n+---------+--------+\n"
@@ -694,10 +719,10 @@ void GestaoA::drawYCities(const string &code, int y) {
     cout << "|   " << code << "   |";
 
     if (size < 10) helpme = "00" + to_string(size);
-    else if(size >= 10 && size < 100) helpme = "0" + to_string(size);
+    else if (size >= 10 && size < 100) helpme = "0" + to_string(size);
     else helpme = to_string(size);
 
-    pair<int, int> pad = auxCenterDraw(7 - (int)helpme.length(), helpme.length()%2 == 1);
+    pair<int, int> pad = auxCenterDraw(7 - (int) helpme.length(), helpme.length() % 2 == 1);
     for (int f = 0; f < pad.first; f++) {
         cout << " ";
         ++f;
@@ -720,7 +745,7 @@ void GestaoA::drawYCities(const string &code, int y) {
 void GestaoA::drawYCountries(const string &code, int y) {
     set<string> countriesReached = yCountries(code, y);
 
-    int size = (int)countriesReached.size();
+    int size = (int) countriesReached.size();
     string helpme;
 
     cout << "\n+---------+-----------+\n"
@@ -729,10 +754,10 @@ void GestaoA::drawYCountries(const string &code, int y) {
     cout << "|   " << code << "   |";
 
     if (size < 10) helpme = "00" + to_string(size);
-    else if(size >= 10 && size < 100) helpme = "0" + to_string(size);
+    else if (size >= 10 && size < 100) helpme = "0" + to_string(size);
     else helpme = to_string(size);
 
-    pair<int, int> pad = auxCenterDraw(10 - (int)helpme.length(), helpme.length()%2 == 1);
+    pair<int, int> pad = auxCenterDraw(10 - (int) helpme.length(), helpme.length() % 2 == 1);
     for (int f = 0; f < pad.first; f++) {
         cout << " ";
         ++f;
@@ -771,7 +796,7 @@ int GestaoA::bfsDiameter(int v) {
                 q.push(w);
                 flightNetwork_.airports[w].visited = true;
                 flightNetwork_.airports[w].dist = flightNetwork_.airports[u].dist + 1;
-                if(flightNetwork_.airports[w].dist > max){max = flightNetwork_.airports[w].dist;}
+                if (flightNetwork_.airports[w].dist > max) { max = flightNetwork_.airports[w].dist; }
             }
         }
     }
@@ -804,7 +829,8 @@ int GestaoA::bfsDiameterCountry(int v, string country) {
                 q.push(w);
                 flightNetwork_.airports[w].visited = true;
                 flightNetwork_.airports[w].dist = flightNetwork_.airports[u].dist + 1;
-                if(flightNetwork_.airports[w].dist > max && flightNetwork_.airports[w].country == country){max = flightNetwork_.airports[w].dist;}
+                if (flightNetwork_.airports[w].dist > max &&
+                    flightNetwork_.airports[w].country == country) { max = flightNetwork_.airports[w].dist; }
             }
         }
     }
@@ -818,9 +844,9 @@ int GestaoA::bfsDiameterCountry(int v, string country) {
 void GestaoA::drawDiameter() {
     int max = 0;
     int count;
-    for(int i = 1; i < flightNetwork_.airports.size(); i++){
+    for (int i = 1; i < flightNetwork_.airports.size(); i++) {
         count = bfsDiameter(i);
-        if(count > max){max = count;}
+        if (count > max) { max = count; }
     }
 
     string helpme = to_string(max);
@@ -843,18 +869,18 @@ void GestaoA::drawDiameterCountry(const string &country) {
     for (int i = 1; i < flightNetwork_.airports.size(); i++) {
         if (flightNetwork_.airports[i].country == country) {
             count = bfsDiameterCountry(i, country);
-            if(count > max){max = count;}
+            if (count > max) { max = count; }
         }
     }
     string helpme;
-    if(max < 10){helpme = "0" + to_string(max);}
-    else{helpme = to_string(max);}
+    if (max < 10) { helpme = "0" + to_string(max); }
+    else { helpme = to_string(max); }
 
     cout << "\n+---------------------------------+----------+\n"
             "|             COUNTRY             | DIAMETER |\n"
             "+---------------------------------+----------+\n";
     cout << "|";
-    pair<int, int> pad = auxCenterDraw((int)(getMaxCountryLength() - country.length()), country.length()%2 == 0);
+    pair<int, int> pad = auxCenterDraw((int) (getMaxCountryLength() - country.length()), country.length() % 2 == 0);
     for (int f = 0; f < pad.first; f++) {
         cout << " ";
         ++f;
@@ -873,15 +899,17 @@ void GestaoA::drawDiameterCountry(const string &country) {
  * Complexidade Temporal O(n).
  * @param airports
  */
-void GestaoA::drawAirportsByCityCountry(const vector<string>& airports) const {
+void GestaoA::drawAirportsByCityCountry(const vector<string> &airports) const {
 
     cout << "\n+-----+--------------------------------------------------------+\n"
             "| COD |                          NAME                          |\n"
             "+-----+--------------------------------------------------------+\n";
 
-    for (const auto& i: airports) {
+    for (const auto &i: airports) {
         cout << "| " << i << " |";
-        pair<int, int> pad = auxCenterDraw(getMaxAirportNameLength() - (int)flightNetwork_.getAirports().at(flightNetwork_.getAirportInfo(i)).name.length(),(int)flightNetwork_.getAirports().at(flightNetwork_.getAirportInfo(i)).name.length() % 2 == 1);
+        pair<int, int> pad = auxCenterDraw(getMaxAirportNameLength() - (int) flightNetwork_.getAirports().at(
+                flightNetwork_.getAirportInfo(i)).name.length(), (int) flightNetwork_.getAirports().at(
+                flightNetwork_.getAirportInfo(i)).name.length() % 2 == 1);
         for (int f = 0; f < pad.first; f++) {
             cout << " ";
             ++f;
@@ -905,9 +933,9 @@ void GestaoA::drawAirlinesByAirport(const string &code) const {
     set<string> aux = getAirlinesFromAirport(code);
     set<Airline> temp;
 
-    for(auto k: aux){
-        for(auto j: airlines){
-            if(j.getCode() == k){
+    for (auto k: aux) {
+        for (auto j: airlines) {
+            if (j.getCode() == k) {
                 temp.insert(j);
             }
         }
@@ -917,9 +945,9 @@ void GestaoA::drawAirlinesByAirport(const string &code) const {
             "| AIRLINE |                          NAME                          |\n"
             "+---------+--------------------------------------------------------+\n";
 
-    for (const auto& i: temp) {
+    for (const auto &i: temp) {
         cout << "|";
-        pair<int, int> pad = auxCenterDraw(8 - (int)i.getCode().length(), i.getCode().length()%2 == 1);
+        pair<int, int> pad = auxCenterDraw(8 - (int) i.getCode().length(), i.getCode().length() % 2 == 1);
         for (int f = 0; f < pad.first; f++) {
             cout << " ";
             ++f;
@@ -930,7 +958,7 @@ void GestaoA::drawAirlinesByAirport(const string &code) const {
             ++e;
         }
         cout << "|";
-        pad = auxCenterDraw(getMaxAirportNameLength() - (int)i.getName().length(), i.getName().length()%2 == 1);
+        pad = auxCenterDraw(getMaxAirportNameLength() - (int) i.getName().length(), i.getName().length() % 2 == 1);
         for (int f = 0; f < pad.first; f++) {
             cout << " ";
             ++f;
@@ -969,8 +997,8 @@ bool GestaoA::ordenar() {
  * @return true caso encontre o país, falso caso não encontre.
  */
 bool GestaoA::findCountry(const string &country) {
-    for (const auto& i: cities) {
-        if(i.getCountry() == country){
+    for (const auto &i: cities) {
+        if (i.getCountry() == country) {
             return true;
         }
     }
@@ -988,6 +1016,112 @@ set<string> GestaoA::getAirlinesFromAirport(const string &code) const {
     for (auto &airport: flightNetwork_.airports[flightNetwork_.getAirportInfo(code)].flights)
         aux.insert(airport.airline);
     return aux;
+}
+
+/*!
+ * Desenha o número de pontos de articulação do grafo geral.
+ * Complexidade Temporal O(|V|+|V|*(|V|+|E|)).
+ */
+void GestaoA::drawArticulationPoints() {
+    for (int i = 1; i < flightNetwork_.airports.size(); i++) {
+        flightNetwork_.airports[i].visited = false;
+        flightNetwork_.airports[i].in_stack = false;
+        flightNetwork_.airports[i].is_articulation = false;
+    }
+    list<int> art;
+    stack<int> aux;
+    int nArt = 0;
+    for (int i = 1; i < flightNetwork_.airports.size(); i++) {
+        if (!flightNetwork_.airports[i].visited)
+            dfsArticulationPoints(i, aux, art, 1, nArt);
+    }
+
+    string helpme = "0" + to_string(nArt);
+
+    cout << "\n+----------+\n"
+            "| NÚMERO DE PONTOS DE ARTICULAÇÃO |\n"
+            "+----------+\n";
+    cout << "|    " << helpme << "    |\n";
+    cout << "+----------+\n";
+}
+
+/*!
+ * Desenha os pontos de articulação do grafo geral.
+ * Complexidade Temporal O(|V|+|V|*(|V|+|E|)).
+ */
+void GestaoA::drawListArticulationPoints() {
+    for (int i = 1; i < flightNetwork_.airports.size(); i++) {
+        flightNetwork_.airports[i].visited = false;
+        flightNetwork_.airports[i].in_stack = false;
+        flightNetwork_.airports[i].is_articulation = false;
+    }
+    list<int> art;
+    stack<int> aux;
+    int nArt = 0;
+    for (int i = 1; i < flightNetwork_.airports.size(); i++) {
+        if (!flightNetwork_.airports[i].visited)
+            dfsArticulationPoints(i, aux, art, 1, nArt);
+    }
+
+    cout << "\n+-----+--------------------------------------------------------+\n"
+            "| COD |                          NAME                          |\n"
+            "+-----+--------------------------------------------------------+\n";
+
+    for (const auto &i: art) {
+        cout << "| " << flightNetwork_.airports[i].code << " |";
+        pair<int, int> pad = auxCenterDraw(getMaxAirportNameLength() - (int) flightNetwork_.airports[i].name.length(),
+                                           (int) flightNetwork_.airports[i].name.length() % 2 == 1);
+        for (int f = 0; f < pad.first; f++) {
+            cout << " ";
+            ++f;
+        }
+        cout << flightNetwork_.airports[i].name;
+        for (int e = 0; e < pad.second; e++) {
+            cout << " ";
+            ++e;
+        }
+        cout << "|\n";
+    }
+    cout << "+-----+--------------------------------------------------------+\n";
+}
+
+/*!
+ * Depth-First Search para calcular os pontos de articulação
+ * Complexidade Temporal O(|V|+|E|).
+ * @param v
+ * @param aux
+ * @param art
+ * @param index
+ * @param nArt
+ */
+void GestaoA::dfsArticulationPoints(int v, stack<int> &aux, list<int> &art, int index, int &nArt) {
+    flightNetwork_.airports[v].visited = true;
+    flightNetwork_.airports[v].low = flightNetwork_.airports[v].num = index;
+    index++;
+    aux.push(v);
+    flightNetwork_.airports[v].in_stack = true;
+    int count = 0;
+
+    for (const auto &f: flightNetwork_.airports[v].flights) {
+        int w = f.dest;
+        if (!flightNetwork_.airports[w].visited) {
+            count++;
+            dfsArticulationPoints(w, aux, art, index, nArt);
+            flightNetwork_.airports[v].low = min(flightNetwork_.airports[v].low, flightNetwork_.airports[w].low);
+        } else if (flightNetwork_.airports[w].in_stack)
+            flightNetwork_.airports[v].low = min(flightNetwork_.airports[v].low, flightNetwork_.airports[w].num);
+
+        if (flightNetwork_.airports[v].num != 1 && !flightNetwork_.airports[v].is_articulation &&
+            flightNetwork_.airports[w].low >= flightNetwork_.airports[v].num) {
+            art.push_back(v);
+            flightNetwork_.airports[v].is_articulation = true;
+            nArt++;
+        } else if (flightNetwork_.airports[v].num == 1 && !flightNetwork_.airports[v].is_articulation && count > 1) {
+            art.push_back(v);
+            flightNetwork_.airports[v].is_articulation = true;
+            nArt++;
+        }
+    }
 }
 
 void GestaoA::setMaxCityLength(int maxLength_) { maxCityLength = maxLength_; }

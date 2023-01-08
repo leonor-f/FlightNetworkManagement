@@ -448,6 +448,28 @@ int main() {
                 else if (op4 == "V" || op4 == "v") break;
             }
         }
+        else if (op == "6"){
+            while (true) {
+                GestaoA::drawAPMenu();
+                string op6;
+                cin >> op6;
+                if (op6.length() != 1) {
+                    Menu::teclaErro();
+                    continue;
+                }
+                else if (op6 == "1") {
+                    a.drawArticulationPoints();
+                    Menu::voltar();
+                }
+                else if (op6 == "2") {
+                    a.drawListArticulationPoints();
+                    Menu::voltar();
+                }
+                else if (op6 == "V" || op6 == "v") {
+                    break;
+                }
+            }
+        }
         else if (op == "q" || op == "Q") {
             Menu::fechouAplicacao();
             break;
