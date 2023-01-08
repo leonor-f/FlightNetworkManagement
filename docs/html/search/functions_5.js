@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['gestaoa_0',['GestaoA',['../class_gestao_a.html#a4739919396655c8ccfce373bb40a982d',1,'GestaoA']]],
+  ['getairlines_1',['getAirlines',['../class_gestao_a.html#ae8e31c3f6fe9c04b6403644897e8e992',1,'GestaoA']]],
+  ['getairlinesfromairport_2',['getAirlinesFromAirport',['../class_gestao_a.html#ab19bad4c9fcec83c1ffabce2e4a53a86',1,'GestaoA']]],
+  ['getairportcode_3',['getAirportCode',['../class_graph.html#ae02ee59b17b826eed8363bad883a23bd',1,'Graph']]],
+  ['getairportcountry_4',['getAirportCountry',['../class_graph.html#ae7bc6916b44a646ffc792dd00ab95295',1,'Graph::getAirportCountry(const string &amp;code) const'],['../class_graph.html#a184f2ad8d4493d21bf3caacab60e33fc',1,'Graph::getAirportCountry(const int &amp;dest) const']]],
+  ['getairportflights_5',['getAirportFlights',['../class_graph.html#aed211748e5dd774b236b2693015ea324',1,'Graph']]],
+  ['getairportinfo_6',['getAirportInfo',['../class_graph.html#a78d2a419433d5fa76c757007aa9e5e67',1,'Graph']]],
+  ['getairportname_7',['getAirportName',['../class_graph.html#a3a1b65e80a465d7a94b74d4acf00d45e',1,'Graph::getAirportName(const string &amp;code) const'],['../class_graph.html#aed73755fc1d486ddd88df50ec8a76fc3',1,'Graph::getAirportName(const int &amp;dest) const']]],
+  ['getairports_8',['getAirports',['../class_gestao_a.html#a03134885588059bcb1756fb3919edce3',1,'GestaoA::getAirports()'],['../class_graph.html#a17e12415dbb97678a74641de39ec5f5d',1,'Graph::getAirports() const']]],
+  ['getairportsbycitycountry_9',['getAirportsByCityCountry',['../class_graph.html#a9bc0c5399c3c6e9c522a0d3228aac234',1,'Graph']]],
+  ['getcities_10',['getCities',['../class_gestao_a.html#a09608805b151be18f91492f5b1db66f0',1,'GestaoA']]],
+  ['getcity_11',['getCity',['../class_city_country.html#a1b431afe23b685f7e68c958932caf839',1,'CityCountry']]],
+  ['getcode_12',['getCode',['../class_airline.html#a41ef613d6b390c463821b9ae43d9ec84',1,'Airline']]],
+  ['getcountry_13',['getCountry',['../class_airline.html#a265c119d09effb03f8c7b3107f8d49dd',1,'Airline::getCountry()'],['../class_city_country.html#abec7e641026766d9b14afba4dc1711cd',1,'CityCountry::getCountry()']]],
+  ['getflightnetwork_14',['getFlightNetwork',['../class_gestao_a.html#a4aca6bb42a6175ac6cb3aea3a68cfe85',1,'GestaoA']]],
+  ['getmaxairlinecountrylength_15',['getMaxAirlineCountryLength',['../class_gestao_a.html#ab5b36a1e7c2f194da74a0f67dded2239',1,'GestaoA']]],
+  ['getmaxairlinenamelength_16',['getMaxAirlineNameLength',['../class_gestao_a.html#a4cfb05218ce4962ef31a570103080ffa',1,'GestaoA']]],
+  ['getmaxairportnamelength_17',['getMaxAirportNameLength',['../class_gestao_a.html#a27d303cf096b1ecf42b7271c3426f3c7',1,'GestaoA']]],
+  ['getmaxcitylength_18',['getMaxCityLength',['../class_gestao_a.html#a1895bc16474ec142865e381427db1e83',1,'GestaoA']]],
+  ['getmaxcountrylength_19',['getMaxCountryLength',['../class_gestao_a.html#ad99d9374567757c2af27dd3aa4d369fe',1,'GestaoA']]],
+  ['getname_20',['getName',['../class_airline.html#a24f8b8e17d2d10af233b12671673bcd8',1,'Airline']]],
+  ['graph_21',['Graph',['../class_graph.html#ae4c72b8ac4d693c49800a4c7e273654f',1,'Graph::Graph()'],['../class_graph.html#a284b99bdb07994225dee3c2cdb59c80a',1,'Graph::Graph(int nodes)']]]
+];

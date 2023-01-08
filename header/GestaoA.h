@@ -49,34 +49,35 @@ class GestaoA {
         static void drawNumberMenu();
         static void drawYMenu();
         static void drawDiameterMenu();
+        static void drawFlyMenu();
+        static void drawAirlineMenu();
+
         void drawCity(const CityCountry& cc, bool header) const;
         void drawCities(const vector<CityCountry>& citiesaux) const;
         void drawAirport(const string& code, bool header);
         void drawAirports(const vector<string>& airports);
         void drawAirline(const Airline& a, bool header) const;
         void drawAirlines(const vector<Airline>& airlinesaux) const;
-        void drawFlight(const string& name, const string& airline, bool header);
+        void drawFlight(const string& name, const string& airline, bool header) const;
         void drawFlights(const string& code);
         void drawNumberOfAirlines(const string& code);
         void drawNumberOfTargets(const string& code);
         void drawNumberOfCountries(const string& code);
-        void drawYairports(const string &code, int y);
-        void drawYcities(const string &code, int y);
-        void drawYcountries(const string &code, int y);
-        void bfsDiameter(int v);
+        void drawYAirports(const string &code, int y);
+        void drawYCities(const string &code, int y);
+        void drawYCountries(const string &code, int y);
+        int bfsDiameter(int v);
+        int bfsDiameterCountry(int v, string country);
         void drawDiameter();
         void drawDiameterCountry(const string &country);
-        void drawAirportsByCityCountry(const string &cc);
-        void drawAirlinesByAirport(const string &code);
+        void drawAirportsByCityCountry(const vector<string>& airports) const;
+        void drawAirlinesByAirport(const string &code) const;
 
-        set<int> Yairports(const string &code, int y);
-        set<CityCountry> Ycities(const string &code, int y);
-        set<string> Ycountries(const string &code, int y);
+        set<int> yAirports(const string &code, int y);
+        set<CityCountry> yCities(const string &code, int y);
+        set<string> yCountries(const string &code, int y);
         static bool ordenar();
-
-        list<Graph::Airport> getAirportsByCityCountry(const string &city) const;
-        set<string> getAirlinesFromAirport(const string &code) const;
-
+        bool findCountry(const string &country);
 
         void setMaxCityLength(int maxLength_);
         void setMaxCountryLength(int maxLength_);
@@ -84,6 +85,7 @@ class GestaoA {
         void setMaxAirlineNameLength(int maxLength_);
         void setMaxAirlineCountryLength(int maxLength_);
 
+        set<string> getAirlinesFromAirport(const string &code) const;
         vector<Graph::Airport> getAirports() const;
         tabHcities getCities() const;
         tabHairlines getAirlines() const;
@@ -93,8 +95,6 @@ class GestaoA {
         int getMaxAirportNameLength() const;
         int getMaxAirlineNameLength() const;
         int getMaxAirlineCountryLength() const;
-        bool findCountry(const string &country);
-        bool findCity(const string &cc);
 
     private:
         tabHcities cities;
@@ -106,6 +106,5 @@ class GestaoA {
         int maxAirlineNameLength = 0;
         int maxAirlineCountryLength = 0;
 };
-
 
 #endif
