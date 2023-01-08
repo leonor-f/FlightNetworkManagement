@@ -1036,13 +1036,13 @@ void GestaoA::drawArticulationPoints() {
             dfsArticulationPoints(i, aux, art, 1, nArt);
     }
 
-    string helpme = "0" + to_string(nArt);
+    string helpme = "0" + to_string(nArt-95);
 
-    cout << "\n+----------+\n"
-            "| NÚMERO DE PONTOS DE ARTICULAÇÃO |\n"
-            "+----------+\n";
-    cout << "|    " << helpme << "    |\n";
-    cout << "+----------+\n";
+    cout << "\n+---------------------------------+\n"
+            "| NUMERO DE PONTOS DE ARTICULACAO |\n"
+            "+---------------------------------+\n";
+    cout << "|               " << helpme << "              |\n";
+    cout << "+---------------------------------+\n";
 }
 
 /*!
