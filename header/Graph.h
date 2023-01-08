@@ -34,6 +34,9 @@ class Graph { // grafo do sistema
             long double longitude; // longitude
             bool visited;          // para futuras pesquisas
             int dist;              // dist to source node
+            int low, num;
+            bool in_stack;         // aeroporto está ou não na stack
+            bool is_articulation;  // aeroporto é ou não ponto de articulação
         };
 
         Graph();                   // default constructor

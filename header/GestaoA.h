@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <set>
+#include <stack>
 #include "Graph.h"
 #include "Airline.h"
 #include "CityCountry.h"
@@ -51,6 +52,7 @@ class GestaoA {
         static void drawDiameterMenu();
         static void drawFlyMenu();
         static void drawAirlineMenu();
+        static void drawAPMenu();
 
         void drawCity(const CityCountry& cc, bool header) const;
         void drawCities(const vector<CityCountry>& citiesaux) const;
@@ -72,6 +74,9 @@ class GestaoA {
         void drawDiameterCountry(const string &country);
         void drawAirportsByCityCountry(const vector<string>& airports) const;
         void drawAirlinesByAirport(const string &code) const;
+        void dfsArticulationPoints(int v, stack<int> &aux, list<int> &art, int index, int &nArt);
+        void drawArticulationPoints();
+        void drawListArticulationPoints();
 
         set<int> yAirports(const string &code, int y);
         set<CityCountry> yCities(const string &code, int y);
