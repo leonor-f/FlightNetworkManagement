@@ -1,6 +1,6 @@
 #include <algorithm>
 #include <queue>
-#include <xmath.h>
+#include <cmath>
 #include <set>
 #include "../header/Graph.h"
 #include "../header/Menu.h"
@@ -113,7 +113,7 @@ void Graph::dfsAirlines(int v, int u, vector<infoFlight> &valuesPath, const vect
  * @param airlines
  */
 void Graph::bfsAirlines(int v, const vector<string> &airlines) {
-    for (Airport airport : airports) {
+    for (Airport &airport : airports) {
         airport.visited = false;
         airport.dist = 0;
     }
