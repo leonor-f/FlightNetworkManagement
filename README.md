@@ -40,5 +40,4 @@ This project within the AED Curricular Unit aims to implement various algorithms
     - Number of articulation points
     - List of articulation points
 
-[Full report here](AED2223_T2_118.pdf).\
-[Code documentation here](docs).
+[Code documentation here](docs)
